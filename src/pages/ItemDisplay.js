@@ -128,7 +128,6 @@ export default class ItemDisplay extends Component
             {
                 try
                 {
-                    // const count= firebase.firestore.FieldValue.increment(-1);
                     // await reference.doc(uuid).collection('myfav').doc(subId).update({
                     //         ProductId: firebase.firestore.FieldValue.delete(),
                     // });
