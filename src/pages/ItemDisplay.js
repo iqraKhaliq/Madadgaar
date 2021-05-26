@@ -1,10 +1,14 @@
 import React,{Component,useState} from 'react';
 import faker from 'faker';
-import {View, Text, Dimensions, Button,Image, StyleSheet,ToastAndroid, TouchableOpacity} from 'react-native';
+import {View, Text, Dimensions, Button,Image, StyleSheet,ToastAndroid, TouchableOpacity,Alert} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import * as firebase from "firebase";
 import { counterEvent } from 'react-native/Libraries/Performance/Systrace';
+import helpPage from './HelpPage';
+import Logo from '../components/Logo';
+import { useScrollToTop } from '@react-navigation/native';
+import MyRequest from './MyRequest';
 
 // constant for screen width
 const Screen_width=Dimensions.get("window").width;
@@ -21,6 +25,7 @@ export default class ItemDisplay extends Component
     {
         super(props);
 
+        global.uid= firebase.auth().currentUser.uid;
         global.subId= uuidGenerator();
 
         const fakeData= [];
@@ -38,6 +43,7 @@ export default class ItemDisplay extends Component
         }
         
         this.state={
+            views: false,
             color: false,
             list:new DataProvider((r1)=> r1).cloneWithRows(fakeData),
         };
@@ -55,7 +61,7 @@ export default class ItemDisplay extends Component
                     case 'NORMAL':
                         {
                             dim.width=Screen_width;
-                            dim.height= 600;
+                            dim.height= 100;
                             break;
                         }
                     default:
@@ -72,6 +78,7 @@ export default class ItemDisplay extends Component
     
     rowRenderer=(type,data) => {
         const {image, name, description} = data.item;
+        let {views}=this.state;
         return(
             <View style={styling.right}>
                 <View>
@@ -93,9 +100,18 @@ export default class ItemDisplay extends Component
                             color={"#fa8072"} 
                             title="Request Item"
                             size={25}  
-                            onPress={this.requestData} 
+                            onPress={this.requestData}
+                            disabled={this.state.views}
                         />
                         
+                        {this.state.views && <Logo/>}
+                        {this.state.views && <Button 
+                                                title="Remove Request" 
+                                                color={"#fa8072"}
+                                                size={25}
+                                                onPress={this.removeData}
+                                                disabled={!this.state.views}
+                                                />}
                     </View>
                 </View>
             </View>
@@ -110,7 +126,9 @@ export default class ItemDisplay extends Component
                     rowRenderer={this.rowRenderer}
                     dataProvider={this.state.list}
                     layoutProvider={this.layoutProvider}
-                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    forceNonDeterministicRendering={true}
+                    canChangeSize={true}
                     />
             </View>
         )
@@ -118,9 +136,8 @@ export default class ItemDisplay extends Component
 
     addTo= async()=>
     {
-        const reference=firebase.firestore().collection("favorites");
-        const uuid= firebase.auth().currentUser.uid;
-        // const subId =uuidGenerator();
+        const reference=firebase.firestore().collection("favorites").doc(uid).collection('myfav');
+        // const uuid= firebase.auth().currentUser.uid;
 
         try
         {
@@ -128,12 +145,7 @@ export default class ItemDisplay extends Component
             {
                 try
                 {
-                    // const count= firebase.firestore.FieldValue.increment(-1);
-                    // await reference.doc(uuid).collection('myfav').doc(subId).update({
-                    //         ProductId: firebase.firestore.FieldValue.delete(),
-                    // });
-
-                    await reference.doc(uuid).collection('myfav').doc(subId).delete();
+                    await reference.doc(subId).delete();
 
                     //color set to white
                     this.setState({color: false});
@@ -148,7 +160,7 @@ export default class ItemDisplay extends Component
             {
                 try
                 {
-                    await reference.doc(uuid).collection('myfav').doc(subId).set({
+                    await reference.doc(subId).set({
                         ProductId: 3,
                     },{merge: true});
                     
@@ -168,9 +180,47 @@ export default class ItemDisplay extends Component
         }
     }
 
-    // requestData= async() =>{
+    requestData= async() =>{
+        
+        // const uid= firebase.auth().currentUser.uid;
+        const reference=firebase.firestore().collection("requests").doc(uid).collection("myRequest");
+        
+        try
+        {
+            await reference.doc(subId).set({
+                ProductId:1
+            });
+            this.setState({views: true});
+            ToastAndroid.show('Item Requested',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            Alert.alert(
+                'Important',
+                `Contact Details of the Donor will be shared with you. Do not misuse it\nThank You`,
+                [{
+                    text: 'Ok',
+                    style: 'cancel'
+                }]
+            );
+        }
+        catch(e)
+        {
+            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+        }
+    }
 
-    // }
+    removeData= async() => {
+        const reference=firebase.firestore().collection("requests").doc(uid).collection("myRequest");
+
+        try
+        {
+            await reference.doc(subId).delete();
+            ToastAndroid.show('Request Canceled', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+            this.setState({views: false});
+        }
+        catch(e)
+        {
+            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+        }
+    }
 }
 
 function uuidGenerator()
@@ -180,7 +230,6 @@ function uuidGenerator()
       return v.toString(16);
     });
 }
-
 
 
 const styling=StyleSheet.create({
