@@ -36,6 +36,7 @@ import favorites from './src/pages/favorites';
 import MyRequest from './src/pages/MyRequest';
 import EditProfile from './src/pages/EditProfile';
 import testPage from './src/pages/testPage';
+import DonorDetails from './src/pages/DonorDetails';
 
 import { createAppContainer } from 'react-navigation';
 import firebase from 'firebase';
@@ -185,6 +186,10 @@ function MenuStack() {
         name="test"
         component={testPage}
         options={{title: 'test'}} />
+      <Stack.Screen
+        name="details"
+        component={DonorDetails}
+        options={{title: 'Details'}} />
 </Stack.Navigator>
   );
 }

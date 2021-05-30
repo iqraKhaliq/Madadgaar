@@ -4,23 +4,15 @@ import {View, Text, Dimensions, Button,Image, StyleSheet,ToastAndroid, Touchable
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import * as firebase from "firebase";
-import { counterEvent } from 'react-native/Libraries/Performance/Systrace';
-import helpPage from './HelpPage';
 import Logo from '../components/Logo';
-import { useScrollToTop } from '@react-navigation/native';
-import MyRequest from './MyRequest';
+import DonorDetails from '../components/DDetails';
+// import DonorDetails from './DonorDetails';
 
 // constant for screen width
 const Screen_width=Dimensions.get("window").width;
 
 export default class ItemDisplay extends Component
 {
-    // state={
-    //     change: false,
-    // };
-
-    
-
     constructor(props)
     {
         super(props);
@@ -104,7 +96,7 @@ export default class ItemDisplay extends Component
                             disabled={this.state.views}
                         />
                         
-                        {this.state.views && <Logo/>}
+                        {this.state.views && <DonorDetails/>}
                         {this.state.views && <Button 
                                                 title="Remove Request" 
                                                 color={"#fa8072"}

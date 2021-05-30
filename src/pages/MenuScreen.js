@@ -26,6 +26,13 @@ const MenuScreen = ({ route, navigation }) => {
             
           <Logo/>
 
+          <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('details')}
+              >
+              <Text style={styles.txtStyl}>Details</Text>
+            </TouchableOpacity>
+
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('test')}
