@@ -288,6 +288,12 @@ function MainApp()
               />
             ),
           }}
+          listeners={({ navigation }) => ({
+              tabPress: e => {
+                e.preventDefault();
+              navigation.openDrawer();
+              }
+            })}
           
            />
 
