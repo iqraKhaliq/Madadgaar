@@ -73,7 +73,8 @@ export class Signin extends React.Component
             value={this.state.email} 
             onChangeText={(email)=>this.setState({email})} 
             style={styles.TextInput} 
-            placeholder='Enter Email Address' 
+            placeholder='Enter Email Address'
+            keyboardType='email-address'
             placeholderTextColor='#fff'
           />
           
@@ -89,15 +90,22 @@ export class Signin extends React.Component
           <TouchableOpacity 
             style={styles.loginButton}
             onPress={()=>this.saveitem()}
-          >
+            >
             <Text style={styles.loginButtonText}>SIGN IN</Text>
           </TouchableOpacity>
          
         </View>
       
         <View style={styles.signupText}>
-            <Text style={{fontSize:20}}>Don't have an account?</Text>
-            <Text style={{fontSize:20, fontWeight:'bold', marginTop:5, textDecorationLine: 'underline'}}
+            <Text
+              style={styles.textS}
+              onPress={() => this.props.navigation.navigate('Main')}
+              >Forgot Password</Text>
+            <Text 
+              style={styles.textA}
+              >Don't have an account?</Text>
+            <Text 
+              style={styles.textS}
               onPress={() => this.props.navigation.navigate('Signup')}>SIGN UP</Text>
         </View>
       </ScrollView>
@@ -108,10 +116,26 @@ export class Signin extends React.Component
 
 const styles = StyleSheet.create
 ({
+  textA:
+  {
+    fontSize:20,
+    color: 'darkred',
+    marginTop:5,
+  },
+  textS:
+  {
+    fontSize:20,
+    fontWeight:'bold',
+    marginBottom:10,
+    textDecorationLine: 'underline',
+    color: 'darkred',
+  },
   container: 
   {
+    paddingTop:40,
     alignItems: 'center',  
     backgroundColor: '#fff',
+    paddingBottom:90,
   },
   logoText:
   {
@@ -132,7 +156,7 @@ const styles = StyleSheet.create
     height:60,
     backgroundColor:'#c4332b',
     opacity:0.7,
-    borderRadius:25,
+    borderRadius:15,
     color:'white',
     paddingHorizontal:10,
   },
@@ -142,7 +166,7 @@ const styles = StyleSheet.create
     height:40,
     backgroundColor:'#ad251d',
     opacity:1,
-    borderRadius:25,
+    borderRadius:15,
     alignItems:'center',
     justifyContent: 'center',
   },

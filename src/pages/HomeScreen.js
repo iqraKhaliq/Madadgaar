@@ -11,7 +11,7 @@ import Logo from '../components/Logo';
 const HomeScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1, padding: 16 }}>
+      <View style={{ flex: 1, padding: 16 ,backgroundColor: '#fff'}}>
         <View
           style={{
             flex: 1,
@@ -21,7 +21,7 @@ const HomeScreen = ({ route, navigation }) => {
         <Logo/>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => navigation.navigate('HomeStack', { screen: 'Signin' })}
+            onPress={() => navigation.navigate( 'Signin' )}
             >
             <Text style={styles.txtStyl}>Sign In</Text>
           </TouchableOpacity>
@@ -40,7 +40,7 @@ const HomeScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#e9967a',
+    backgroundColor: '#ad251d',
     padding: 10,
     width: 300,
     marginTop: 16,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
   },
   txtStyl:
   {
-    color:'darkred',
+    color:'#fff',
     fontWeight:'bold',
     fontSize: 15,
   },

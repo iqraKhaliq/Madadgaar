@@ -1,22 +1,17 @@
-import * as React from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView
-} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import React,{Component} from 'react';
+import {TouchableOpacity,StyleSheet,View,Text,SafeAreaView,ScrollView} from 'react-native';
 import Logo from '../components/Logo';
 
-const MenuScreen = ({ route, navigation }) => {
+export function MenuScreen({navigation})
+{
   return (
-    <ScrollView
-      vertical={true}
-      showsVerticalScrollIndicator={false}
-      >
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ flex: 1, padding: 10 }}>
+      <View style={{ flex: 1, padding: 10 }}>
+        <SafeAreaView style={{ flex: 1 }}>
+          <ScrollView
+            vertical={true}
+            showsVerticalScrollIndicator={false}
+            >
+        
           <View
             style={{
               flex: 1,
@@ -149,10 +144,10 @@ const MenuScreen = ({ route, navigation }) => {
               >
               <Text style={styles.txtStyl}>FAQ's</Text>
             </TouchableOpacity>
-          </View>
-        </View>
-      </SafeAreaView>
-    </ScrollView>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+      </View>
   );
 }
 
