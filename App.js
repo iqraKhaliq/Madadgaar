@@ -70,19 +70,6 @@ function MenuDrawer({navigation})
   )
 }
 
-// function CustomDrawerContent(props)
-// {
-//   <DrawerContentScrollView {...props}>
-//     <DrawerItemList {...props}/>
-//     <DrawerItem 
-//       label="Close"
-//       onPress={() => props.navigation.closeDrawer()}/>
-//     <DrawerItem 
-//       label="Open"
-//       onPress={() => props.navigation.openDrawer()}/>
-//   </DrawerContentScrollView>
-// }
-
 // for tab navigation
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -284,8 +271,7 @@ function MainApp()
                 name="menu"
                 color={color}
                 size={size}
-                // onPress={()=> this.props.navigation.openDrawer()}
-              />
+                />
             ),
           }}
           listeners={({ navigation }) => ({
