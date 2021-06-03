@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
 import * as firebase from 'firebase';
 import Logo from '../components/Logo';
-import Form from '../components/SigninForm';
 
 export class Signin extends React.Component 
 {

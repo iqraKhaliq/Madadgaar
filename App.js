@@ -13,7 +13,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator, DrawerContentScrollView, DrawerItem, DrawerItemList} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 
 // importing screens
 import HomeScreen from './src/pages/HomeScreen';
@@ -39,10 +39,8 @@ import MyRequest from './src/pages/MyRequest';
 import EditProfile from './src/pages/EditProfile';
 import testPage from './src/pages/testPage';
 import DonorDetails from './src/pages/DonorDetails';
-import Toggle from './src/pages/Toggle';
 
-import { createAppContainer } from 'react-navigation';
-import firebase from 'firebase';
+import * as firebase from 'firebase';
 import { firebaseConfig } from './config';
 
 
@@ -92,6 +90,10 @@ function HomeStack()
             name="ItemDisplay"
             component={ItemDisplay}
             options={{title: 'Item Display'}} />
+          <Stack.Screen
+            name="details"
+            component={DonorDetails}
+            options={{title: 'Details'}} />
       </Stack.Navigator>
   );
 }
@@ -99,7 +101,6 @@ function HomeStack()
 function MenuStack() 
 {
   return (
-    // this.props.navigation.openDrawer();
     <Stack.Navigator
       initialRouteName="Start"
       screenOptions={{
@@ -107,10 +108,7 @@ function MenuStack()
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: 'bold' }
       }}>
-        <Stack.Screen
-          name="Start"
-          component={Toggle}/>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Menu"
           component={MenuScreen}
           options={{ title: 'Menu' }}/>
@@ -189,7 +187,7 @@ function MenuStack()
         <Stack.Screen
           name="details"
           component={DonorDetails}
-          options={{title: 'Details'}} />
+          options={{title: 'Details'}} /> */}
     </Stack.Navigator>
   );
 }
