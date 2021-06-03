@@ -30,7 +30,7 @@ export class Signin extends React.Component
         .then((data)=>
         {
           ToastAndroid.show('LogIn Successful', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
-          alert('Successfully Logging In');
+          // alert('Successfully Logging In');
           this.setState({email:""});
           this.setState({password:""});
           this.props.navigation.navigate('Main');
@@ -98,7 +98,7 @@ export class Signin extends React.Component
         <View style={styles.signupText}>
             <Text
               style={styles.textS}
-              onPress={() => this.props.navigation.navigate('Main')}
+              // onPress={() => this.props.navigation.navigate('Main')}
               >Forgot Password</Text>
             <Text 
               style={styles.textA}
@@ -131,27 +131,28 @@ const styles = StyleSheet.create
   },
   container: 
   {
-    paddingTop:40,
+    paddingTop:30,
     alignItems: 'center',  
+    justifyContent: 'center',
     backgroundColor: '#fff',
-    paddingBottom:90,
+    paddingBottom:30,
   },
-  logoText:
-  {
-    color: '#ef5350',
-    fontWeight: 'bold',
-    fontSize: 30, 
-  },
+  // logoText:
+  // {
+  //   color: '#ef5350',
+  //   fontWeight: 'bold',
+  //   fontSize: 30, 
+  // },
   signupText:
   {
     marginTop:50,
-    marginBottom: 50,
+    // marginBottom: 50,
     alignItems:'center',
   },
   TextInput:
   {
     width:300,
-    marginBottom:30,
+    marginBottom:20,
     height:60,
     backgroundColor:'#c4332b',
     opacity:0.7,

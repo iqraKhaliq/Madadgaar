@@ -96,7 +96,7 @@ const EditProfile = () => {
         <View style={styles.action}>
           <FontAwesome name="user-o" size={20} />
           <TextInput
-           placeholder="First Name"
+            placeholder="First Name"
             placeholderTextColor= "#666666"
             autocorrect={false}
             value={data ? data.FirstName : ''}

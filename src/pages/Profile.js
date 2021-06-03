@@ -228,7 +228,7 @@ const Profile = ({route,navigation}) => {
 
     editProfileButton:
     {
-      width:120,
+      width:140,
       // height:15,
       backgroundColor:'#ad251d',
       opacity:1,
@@ -240,7 +240,7 @@ const Profile = ({route,navigation}) => {
     AdminButton:
     {
       backgroundColor: '#fa8072',
-      width: 170,
+      width: 190,
       alignItems: 'center',
       borderRadius: 25,
       padding: 3,

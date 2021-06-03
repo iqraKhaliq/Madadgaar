@@ -85,7 +85,8 @@ function HomeStack()
           <Stack.Screen
             name="Main"
             component={MainPage}
-            options={{title: 'Home'}} />
+            options={{title: 'Home',
+              headerLeft: ()=> null,}} />
           <Stack.Screen
             name="ItemDisplay"
             component={ItemDisplay}
@@ -94,6 +95,14 @@ function HomeStack()
             name="details"
             component={DonorDetails}
             options={{title: 'Details'}} />
+          <Stack.Screen
+            name="Suggestion"
+            component={SuggestionScreen}
+            options={{title: 'Suggestion & Feedback'}}/>
+          <Stack.Screen
+            name="FeedbackList"
+            component={FeedbackList}
+            options={{title: 'User Feedbacks'}} />
       </Stack.Navigator>
   );
 }
@@ -205,7 +214,8 @@ function PostAdStack()
             <Stack.Screen
               name="PostAd"
               component={PostAdScreen}
-              options={{ title: 'PostAd Page' }}/>
+              options={{ title: 'PostAd Page',
+                headerLeft: ()=> null,}}/>
         </Stack.Navigator>
     );
 }
@@ -223,7 +233,88 @@ function SearchStack()
             <Stack.Screen
               name="Search"
               component={Categories}
-              options={{ title: 'Search' }}/>
+              options={{ title: 'Search',
+                headerLeft: ()=> null, }}/>
+            <Stack.Screen
+              name="Menu"
+              component={MenuScreen}
+              options={{ title: 'Menu' }}/>
+        {/* <Stack.Screen
+          name="Signin"
+          component={SigninScreen}
+          options={{ title: 'Sign In' }}/>
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
+          options={{ title: 'Sign Up' }}/> */}
+        <Stack.Screen
+          name="Suggestion"
+          component={SuggestionScreen}
+          options={{title: 'Suggestion & Feedback'}}/>
+        <Stack.Screen
+          name="Contact"
+          component={ContactPage}
+          options={{title: 'Contact Us'}} />
+        <Stack.Screen
+          name="Help"
+          component={HelpPage}
+          options={{title: 'Help'}} />
+        <Stack.Screen
+          name="FAQ"
+          component={FAQpage}
+          options={{title: 'FAQ'}} />
+        <Stack.Screen
+          name="Main"
+          component={MainPage}
+          options={{title: 'Ads'}} />
+        <Stack.Screen
+          name="Profile"
+          component={Profile}
+          options={{title: 'Profile'}} />
+        <Stack.Screen
+          name="ItemDisplay"
+          component={ItemDisplay}
+          options={{title: 'Item Display'}} />
+        <Stack.Screen
+          name="FeedbackList"
+          component={FeedbackList}
+          options={{title: 'User Feedbacks'}} />
+        {/* <Stack.Screen
+          name="Categories"
+          component={Categories}
+          options={{title: 'Categories'}} /> */}
+        <Stack.Screen
+          name="Users"
+          component={Users}
+          options={{title: 'Users List'}} />
+        <Stack.Screen
+          name="FilterData"
+          component={FilterDataList}
+          options={{title: 'Ads'}} />
+        <Stack.Screen
+          name="MyRequest"
+          component={MyRequest}
+          options={{title: 'My Requests'}} />
+        <Stack.Screen
+          name="MyAds"
+          component={MyAds}
+          options={{title: 'My Ads'}} />
+        <Stack.Screen
+          name="Favorites"
+          component={favorites}
+          options={{title: 'My Favorites'}} />
+        <Stack.Screen
+          name="EditProfile"
+          component={EditProfile}
+          options={{title: 'Edit Profile'}} />
+        <Stack.Screen
+          name="test"
+          component={testPage}
+          options={{title: 'test'}} />
+        <Stack.Screen
+          name="details"
+          component={DonorDetails}
+          options={{title: 'Details'}} />
         </Stack.Navigator>
     );
 }
@@ -241,7 +332,8 @@ function AccountStack()
             <Stack.Screen
               name="Account"
               component={Profile}
-              options={{ title: 'My Account' }}/>
+              options={{ title: 'My Account',
+                headerLeft: ()=> null, }}/>
         </Stack.Navigator>
     );
 }
@@ -257,6 +349,7 @@ function MainApp()
         tabBarOptions={{
           activeTintColor: '#8b0000',
           inActiveTintColor:'#666666',
+          // keyboardHidesTabBar: false,
         }}
         >
         <Tab.Screen
@@ -307,7 +400,8 @@ function MainApp()
               size={size}
               />
             ),
-          }} />
+          }}
+           />
         
         <Tab.Screen
           name="SearchStack"

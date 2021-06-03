@@ -167,12 +167,12 @@ export function MenuScreen({navigation})
               <Text style={styles.txtStyl}>Sign Up</Text>
             </TouchableOpacity> */}
 
-            {/* <TouchableOpacity
+            <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('FeedbackList')}
               >
               <Text style={styles.txtStyl}>Feedback List</Text>
-            </TouchableOpacity> */}
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}

@@ -21,7 +21,6 @@ const styles = StyleSheet.create({
     stretch: {
       width: 300,
       height: 300,
-      
     },
   });
   
