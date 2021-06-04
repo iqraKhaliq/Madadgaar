@@ -92,7 +92,7 @@ const Profile = ({route,navigation}) => {
 
       {B &&<TouchableOpacity 
         style={styles.AdminButton} 
-        onPress={()=> alert('hello')}>
+        onPress={()=> navigation.navigate('AdminStack')}>
         <Icon name="account-tie" color='white' size={15} />
         <Text style={styles.AdminText} >Admin DashBoard</Text>
       </TouchableOpacity>}

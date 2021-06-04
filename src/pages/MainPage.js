@@ -48,12 +48,13 @@ export class MainPage extends Component
                     <Form type="GetLocation" /> 
             </Text>
         </View>
-
+        <ScrollView showsVerticalScrollIndicator={false}>
         <FlatList
           style={styles.container}
           data={this.state.users}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
+            
             <TouchableOpacity onPress={() => this.props.navigation.navigate('ItemDisplay',{id: item.id})}>
               <View style={styles.Vstyle}>
                 <Image source={{uri: item.Image1}} style={{width: 100,height:100}}/>
@@ -63,8 +64,10 @@ export class MainPage extends Component
                 </View>
               </View>
             </TouchableOpacity>
+            
           )}
           />
+        </ScrollView>
       </View>
     );
   }
@@ -76,8 +79,9 @@ const styles= StyleSheet.create({
     backgroundColor: '#fffaf0',
     padding:10,
     flexDirection:'column',
-    marginBottom:10,
+    marginBottom:30,
     // margin:10,
+    // height: '100%',
   },
   Vstyle:
   {

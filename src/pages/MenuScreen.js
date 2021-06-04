@@ -39,8 +39,8 @@ export function MenuScreen({navigation})
   }, [navigation,loading]);
 
   return (
-      <View style={{ flex: 1,backgroundColor: '#ffe4e1' }}>
-        <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1,backgroundColor: '#ffe4e1',height: '100%', alignContent: 'flex-start' }}>
+        <SafeAreaView>
           <ScrollView
             vertical={true}
             showsVerticalScrollIndicator={false}
@@ -52,7 +52,6 @@ export function MenuScreen({navigation})
               justifyContent: 'center',
             }}>
             
-          {/* <Logo/> */}
           <View style={styles.Vstyle} >
             <Text style={styles.VTstyle}>Welcome {data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Text>
           </View>
@@ -242,6 +241,7 @@ const styles = StyleSheet.create
     flex:1,
     minWidth:280,
     borderColor: 'white',
+    flexDirection: 'column-reverse',
   },
   signout:
   {
@@ -253,6 +253,7 @@ const styles = StyleSheet.create
     marginLeft: 5,
     borderRadius:10,
     justifyContent: 'flex-end',
+    flexDirection: 'column-reverse',
   },
   txtSignout:
   {
