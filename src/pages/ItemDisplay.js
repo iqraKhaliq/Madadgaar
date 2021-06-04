@@ -1,146 +1,128 @@
-import React,{Component,useState} from 'react';
-import faker from 'faker';
-import {View, Text, Dimensions, Button,Image, StyleSheet,ToastAndroid, TouchableOpacity,Alert} from 'react-native';
-import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
+import React,{Component,useEffect,useState} from 'react';
+import {View, Text, Button,Image, StyleSheet, ToastAndroid, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import * as firebase from "firebase";
-import Logo from '../components/Logo';
-import DonorDetails from '../components/DDetails';
-// import DonorDetails from './DonorDetails';
 
-// constant for screen width
-const Screen_width=Dimensions.get("window").width;
+//id created for item
+global.subId= uuidGenerator();
 
-export default class ItemDisplay extends Component
+export default function ItemDisplay({route,navigation})
 {
-    constructor(props)
-    {
-        super(props);
+    //product selected id
+    const {id}= route.params;
+    //logged in user uid
+    const uid= firebase.auth().currentUser.uid;
 
-        global.uid= firebase.auth().currentUser.uid;
-        global.subId= uuidGenerator();
+    const [views,setViews]= useState(false);
+    const [color,setColor]= useState(false);
+    const [users,setUsers]= useState([]);
 
-        const fakeData= [];
-        for( var a=0 ; a<1 ; a+= 1)
+    const itemData= async() =>{
+        try
         {
-            fakeData.push({
-                type: 'NORMAL',
-                item:{
-                    id: a,
-                    image: faker.image.business(),
-                    name:faker.commerce.productName(),
-                    description: faker.random.words(5),
-                },
-            });
+            await firebase.firestore()
+                        .collection('ads')
+                        .doc(id)
+                        .get()
+                        .then(snapShot =>{
+                            if(snapShot.exists)
+                            {
+                                console.log(snapShot.data());
+                                setUsers(snapShot.data());
+                            }
+                        })
         }
-        
-        this.state={
-            views: false,
-            color: false,
-            list:new DataProvider((r1)=> r1).cloneWithRows(fakeData),
-        };
-        
-        // update=()=> {
-        //     this.setState({color: true});
-        // };
-
-        this.layoutProvider=new LayoutProvider((a)=>{
-            return this.state.list.getDataForIndex(a).type;
-        },
-        (type,dim)=>{
-            switch(type)
-                {
-                    case 'NORMAL':
-                        {
-                            dim.width=Screen_width;
-                            dim.height= 100;
-                            break;
-                        }
-                    default:
-                        {
-                            dim.width= 1;
-                            dim.height= 1;
-                            break;
-                        }
-                };
-            }
-        )
+        catch(e)
+        {
+            ToastAndroid.show('Nothing to Display',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+        }             
     }
 
-    
-    rowRenderer=(type,data) => {
-        const {image, name, description} = data.item;
-        let {views}=this.state;
-        return(
-            <View style={styling.right}>
-                <View>
-                    <View style={styling.rowStyleV}>
-                        <Image source={{uri:image}} style={styling.image} />
+    useEffect(() => {
+        itemData();
+    },[]);
+
+    return(
+        <View style={styles.container}>
+        <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
+            <View style={styles.containerInner}>
+                <View style={styles.Vstyle}>
+                    <View style={styles.VInstyle}>
+                        <ScrollView 
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            style={{width: 260}}
+                            >
+                                <Image source={{uri: users.Image1}} style={{width: 250,height:280}}/>
+                                {!!users.Image2 && <Image source={{uri: users.Image2}} style={styles.Simage}/>}
+                                {!!users.Image3 &&<Image source={{uri: users.Image3}} style={styles.Simage}/>}
+                                {!!users.Image4 && <Image source={{uri: users.Image4}} style={styles.Simage}/>}
+                                 
+                        </ScrollView>
+
+                        {!!users.Image2 && <Text style={styles.note}>Note: Swipe to see the Picture</Text>}
+
+                        <View style={styles.VInstyle}>
+                            <Text style={styles.Fstyle}>{users.ProductName}</Text>
+                            <Text style={styles.Estyle}>{users.Description}</Text>
+                        </View>
+                    </View>
+                            
+                    <View style={styles.VIcon}>
                         <MaterialCommunityIcons 
                             name='cards-heart' 
                             size={30} 
-                            color={this.state.color ? "red": "white"}  
-                            style={styling.icon} 
-                            onPress={this.addTo}
+                            color={color ? "red": "white"}  
+                            style={styles.icon} 
+                            onPress={addTo}
                             />
                     </View>
+                </View>
 
-                    <View style={styling.left}>
-                        <Text style={styling.describe1}>{name}</Text>
-                        <Text style={styling.describe2}>{description}</Text>
-                        <Button 
-                            color={"#fa8072"} 
-                            title="Request Item"
-                            size={25}  
-                            onPress={this.requestData}
-                            disabled={this.state.views}
+                <View style={styles.DataView}>
+                    <Button 
+                        color={"#fa8072"} 
+                        title="Request Item"
+                        size={25}  
+                        onPress={requestData}
+                        disabled={views}
                         />
-                        
-                        {this.state.views && <DonorDetails/>}
-                        {this.state.views && <Button 
-                                                title="Remove Request" 
-                                                color={"#fa8072"}
-                                                size={25}
-                                                onPress={this.removeData}
-                                                disabled={!this.state.views}
-                                                />}
-                    </View>
+
+                    {views && 
+                        <View style={styles.VD}>
+                            <Text style={styles.Dstyle}>Donor's Name: {users.DonorName}</Text>
+                            <Text style={styles.Dstyle}>Phone Number: {users.Phone}</Text>
+                            <Text style={styles.Dstyle}>Area: {users.Area}</Text>
+                            <Text style={styles.Dstyle}>City: {users.City}</Text>
+                        </View>}            
+                
+                    {views && <Button 
+                                title="Remove Request" 
+                                color={"#fa8072"}
+                                size={25}
+                                onPress={removeData}
+                                disabled={!views}
+                                />}
                 </View>
             </View>
-            )
-    }
+        </ScrollView>                                 
+        </View>
+    )
 
-    render()
-    {
-        return(
-            <View style={styling.container} >
-                <RecyclerListView
-                    rowRenderer={this.rowRenderer}
-                    dataProvider={this.state.list}
-                    layoutProvider={this.layoutProvider}
-                    showsVerticalScrollIndicator={false}
-                    forceNonDeterministicRendering={true}
-                    canChangeSize={true}
-                    />
-            </View>
-        )
-    }
-
-    addTo= async()=>
+    async function addTo()
     {
         const reference=firebase.firestore().collection("favorites").doc(uid).collection('myfav');
-        // const uuid= firebase.auth().currentUser.uid;
 
         try
         {
-            if(this.state.color === true)
+            if(color === true)
             {
                 try
                 {
                     await reference.doc(subId).delete();
-
+                    
                     //color set to white
-                    this.setState({color: false});
+                    setColor(false);
                     ToastAndroid.show('Removed from Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
                 catch(e)
@@ -148,16 +130,16 @@ export default class ItemDisplay extends Component
                     ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
             }
-            else if(this.state.color === false)
+            else if(color === false)
             {
                 try
                 {
                     await reference.doc(subId).set({
-                        ProductId: 3,
+                        ProductId: id,
                     },{merge: true});
-                    
+                
                     //color set to red
-                    this.setState({color: true});
+                    setColor(true);
                     ToastAndroid.show('Added to Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
                 catch(e)
@@ -172,17 +154,17 @@ export default class ItemDisplay extends Component
         }
     }
 
-    requestData= async() =>{
-        
-        // const uid= firebase.auth().currentUser.uid;
+    async function requestData()
+    {
         const reference=firebase.firestore().collection("requests").doc(uid).collection("myRequest");
         
         try
         {
             await reference.doc(subId).set({
-                ProductId:1
+                ProductId:id,
             });
-            this.setState({views: true});
+            
+            setViews(true);
             ToastAndroid.show('Item Requested',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
             Alert.alert(
                 'Important',
@@ -199,14 +181,16 @@ export default class ItemDisplay extends Component
         }
     }
 
-    removeData= async() => {
+    async function removeData()
+    {
         const reference=firebase.firestore().collection("requests").doc(uid).collection("myRequest");
 
         try
         {
             await reference.doc(subId).delete();
             ToastAndroid.show('Request Canceled', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
-            this.setState({views: false});
+            // this.setState({views: false});
+            setViews(false);
         }
         catch(e)
         {
@@ -214,6 +198,8 @@ export default class ItemDisplay extends Component
         }
     }
 }
+
+
 
 function uuidGenerator()
 {
@@ -224,78 +210,88 @@ function uuidGenerator()
 }
 
 
-const styling=StyleSheet.create({
-    left:
-    {
-        // flex:1,
-        alignItems: 'baseline',
-        justifyContent: 'space-evenly',
-        color: 'darkred',
-        padding: 5,
-        margin: 5,
-        // flexDirection:'column',   
-    },
-    right:
-    {
-        padding: 10,
-        margin: 10,
-        flexDirection:'column',
-        justifyContent: 'space-evenly',   
-        backgroundColor:'#ffe4c4',
-    },
-    rowStyleV:
-    {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
+const styles= StyleSheet.create({
     container:
     {
-        // minHeight: 100,
-        // minWidth:100,
-        flex: 1,
-        backgroundColor:'#fffaf0',
+      backgroundColor: 'white',
+      padding: 10,
+      flexDirection: 'column',
+      marginBottom: 10,
+      height: '100%',
+    },
+    containerInner:
+    {
+        backgroundColor: 'lightpink',
         padding: 10,
-        flexDirection:'column',   
+        flexDirection: 'column',
+        margin: 5,   
     },
-    image:
+    Vstyle:
     {
-        height: 200,
-        width: 200,
-        alignContent:'flex-start',
-        padding:5,
-        margin:5,
+      padding: 5,
+      margin: 5,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
     },
-    describe1:
+    VInstyle:
     {
-        fontSize: 25,
-        color: 'darkred',
-        fontStyle:'italic',
-        fontWeight:'bold',
-        // padding:5,
-        margin:5,
+      flexDirection: 'column',
+      padding: 5,
+      margin: 5,
     },
-    describe2:
+    VD:
     {
-        fontSize: 20,
-        color: '#dc143c',
-        // padding:5,
-        margin:5,
+        backgroundColor: 'darksalmon',
+        flexDirection: 'column',
+        padding: 5,
+        margin: 5,
+        width: '90%',
+    },
+    Estyle:
+    {
+      fontSize: 30,
+      color: 'maroon',
+      marginTop: 5,
+    },
+    Fstyle:
+    {
+      fontSize: 40,
+      color: 'maroon',
+      marginTop: 5,
+      fontWeight: 'bold',
+      alignItems: 'baseline',
+    },
+    Dstyle:
+    {
+      fontSize: 25,
+      color: 'maroon',
+      margin: 5,
+      fontWeight: '500',
     },
     icon:
     {
-        flexDirection:'row-reverse',   
+        flexDirection: 'row-reverse',   
     },
-    txt:
+    DataView:
     {
-        alignItems:'center',
-        fontSize: 20,
+        alignItems: 'baseline',
+        justifyContent: 'space-evenly',
         color: 'darkred',
-        backgroundColor:'#fa8072',
-        padding:8,
-        margin:8,
-        alignContent: 'center',
-        width: 200,
+        paddingLeft: 10,
+        marginLeft: 5,
     },
-});
-
-
+    Simage:
+    {
+        width: 280,
+        height: 280,
+        paddingLeft: 5,
+        marginLeft: 5,
+    },
+    note:
+    {
+        color: 'red',
+        fontWeight: '500',
+        fontSize: 20,
+    }
+  });
+  

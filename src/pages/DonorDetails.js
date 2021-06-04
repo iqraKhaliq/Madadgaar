@@ -1,6 +1,6 @@
 import React,{Component,useState,useEffect} from "react";
 import { StatusBar } from 'expo-status-bar';
-import {View, Text, StyleSheet, ScrollView,FlatList,Image} from "react-native";
+import {View, Text, StyleSheet, ScrollView,FlatList,Image,TouchableOpacity} from "react-native";
 import * as firebase from "firebase";
 
 export class DonorDetails extends Component
@@ -17,7 +17,13 @@ export class DonorDetails extends Component
                               .onSnapshot(docs => {
                                 let users=[];
                                 docs.forEach(doc => {
-                                  users.push(doc.data());
+                                  const {Image1,ProductName,Description}=doc.data();
+                                  users.push({
+                                    id: doc.id, 
+                                    Image1,
+                                    ProductName,
+                                    Description,
+                                  });
                                 });
                                 this.setState({users});
                                 console.log(users);
@@ -34,18 +40,22 @@ export class DonorDetails extends Component
       //       </View> )}
       //   </View>
       <View style={StyleSheet.container}>
+        
+
         <FlatList
           style={styles.container}
           data={this.state.users}
+          showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
-            <View style={styles.Vstyle}>
-              <Image source={{uri: item.Image1}} style={{width: 100,height:100}}/>
-              <View style={styles.VInstyle}>
-                <Text style={styles.Fstyle}>{item.ProductName}</Text>
-                <Text style={styles.Estyle}>{item.Description}</Text>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('ItemDisplay',{id: item.id})}>
+              <View style={styles.Vstyle}>
+                <Image source={{uri: item.Image1}} style={{width: 100,height:100}}/>
+                <View style={styles.VInstyle}>
+                  <Text style={styles.Fstyle}>{item.ProductName}</Text>
+                  <Text style={styles.Estyle}>{item.Description}</Text>
+                </View>
               </View>
-
-            </View>
+            </TouchableOpacity>
           )}
           />
       </View>
@@ -59,6 +69,8 @@ const styles= StyleSheet.create({
     backgroundColor: 'white',
     padding:10,
     flexDirection:'column',
+    marginBottom:10,
+    // margin:10,
   },
   Vstyle:
   {

@@ -71,7 +71,7 @@ export default function GetLocation()
 
   return(
     <View>
-      <Text style={styling.txt} onPress={()=> setGetLocation(!getLocation)}>  {st} {dt}, {ct}. </Text>
+      <Text style={styling.txt} onPress={()=> setGetLocation(!getLocation)}> {st} {dt}, {ct}. </Text>
     </View>
   );
 }
@@ -79,9 +79,9 @@ export default function GetLocation()
 const styling= StyleSheet.create({
   txt:
   {
-    fontSize:20,
+    fontSize:22,
     color: 'darkred',
-    fontStyle:'italic',
+    // fontStyle:'italic',
     fontWeight: 'bold',
     paddingLeft:5,
     marginLeft:5,

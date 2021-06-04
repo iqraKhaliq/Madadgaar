@@ -1,9 +1,12 @@
 import * as React from 'react';
+import * as firebase from 'firebase';
+import {firebaseConfig} from './config';
 
 if(!firebase.apps.length)
 {
-  firebase.initializeApp( firebaseConfig ) ;
+  firebase.initializeApp(firebaseConfig) ;
 }
+
 
 //icons for tab navigator
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -40,8 +43,6 @@ import EditProfile from './src/pages/EditProfile';
 import testPage from './src/pages/testPage';
 import DonorDetails from './src/pages/DonorDetails';
 
-import * as firebase from 'firebase';
-import { firebaseConfig } from './config';
 
 
 //for drawer navigation

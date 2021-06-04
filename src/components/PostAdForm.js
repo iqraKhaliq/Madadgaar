@@ -59,18 +59,15 @@ async componentDidMount()
     return (
       <View style={styles.viewer}>
           <View style={styles.viewer2}>
-              {!!image1 && (
                 <ScrollView 
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}
                   > 
-                  { <Image source={{ uri: image1 }} style={styles.ImgSytl} />}
+                  {!!image1 && <Image source={{ uri: image1 }} style={styles.ImgSytl} />}
                   {!!image2 && <Image source={{ uri: image2 }} style={styles.ImgSytl} />}
                   {!!image3 && <Image source={{ uri: image3 }} style={styles.ImgSytl} />}
                   {!!image4 && <Image source={{ uri: image4 }} style={styles.ImgSytl} />}
-                </ScrollView>
-              )}
-              
+                </ScrollView>  
           </View>
           
           <Button 
@@ -94,20 +91,22 @@ async componentDidMount()
                     onPress={this.pickImg2}  
                     style={styles.icn} 
                     />
+                  {!!image2 &&  
                   <MaterialIcons 
                     name="add-a-photo" 
                     size={40} 
                     color="darkred"  
                     onPress={this.pickImg3}  
                     style={styles.icn} 
-                    />
+                    />}
+                  {!!image3 &&
                   <MaterialIcons 
                     name="add-a-photo" 
                     size={40} 
                     color="darkred"  
                     onPress={this.pickImg4}  
                     style={styles.icn} 
-                    />
+                    />}
           </ScrollView>
   
           <ScrollView 
@@ -445,6 +444,7 @@ const styles= StyleSheet.create({
         paddingVertical: 5,
         alignItems: 'flex-start',
         backgroundColor: '#fffaf0',
+        height: '100%',
     },
     viewer2:
     { 

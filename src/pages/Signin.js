@@ -136,6 +136,7 @@ const styles = StyleSheet.create
     justifyContent: 'center',
     backgroundColor: '#fff',
     paddingBottom:30,
+    height: '100%',
   },
   // logoText:
   // {
