@@ -3,10 +3,7 @@ import {View, Text, Button,Image, StyleSheet, ToastAndroid, TouchableOpacity, Al
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import * as firebase from "firebase";
 
-//id created for item
-global.subId= uuidGenerator();
-
-export default function ItemDisplay({route,navigation})
+export function AdminItemDisplay({route,navigation})
 {
     //product selected id
     const {id}= route.params;
@@ -14,7 +11,7 @@ export default function ItemDisplay({route,navigation})
     const uid= firebase.auth().currentUser.uid;
 
     const [views,setViews]= useState(false);
-    const [color,setColor]= useState(false);
+    // const [color,setColor]= useState(false);
     const [users,setUsers]= useState([]);
 
     const itemData= async() =>{
@@ -51,7 +48,7 @@ export default function ItemDisplay({route,navigation})
                         <ScrollView 
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
-                            style={{width: 260}}
+                            style={{width: 300}}
                             >
                                 <Image source={{uri: users.Image1}} style={styles.Simage}/>
                                 {!!users.Image2 && <Image source={{uri: users.Image2}} style={styles.Simage}/>}
@@ -67,105 +64,79 @@ export default function ItemDisplay({route,navigation})
                             <Text style={styles.Estyle}>{users.Description}</Text>
                         </View>
                     </View>
-                            
-                    <View style={styles.VIcon}>
-                        <MaterialCommunityIcons 
-                            name='cards-heart' 
-                            size={30} 
-                            color={color ? "red": "white"}  
-                            style={styles.icon} 
-                            onPress={addTo}
-                            />
-                    </View>
                 </View>
 
                 <View style={styles.DataView}>
                     <Button 
                         color={"#fa8072"} 
-                        title="Request Item"
+                        title="View Details"
                         size={25}  
-                        onPress={requestData}
+                        onPress={requestDetails}
                         disabled={views}
                         />
 
+                    
                     {views && 
                         <View style={styles.VD}>
+                            {!!users.UserId && <Text style={styles.Dstyle}>Donor Id: {users.UserId}</Text>}
                             <Text style={styles.Dstyle}>Donor's Name: {users.DonorName}</Text>
+                            <Text style={styles.Dstyle}>Category: {users.Category}</Text>
                             <Text style={styles.Dstyle}>Phone Number: {users.Phone}</Text>
                             <Text style={styles.Dstyle}>Area: {users.Area}</Text>
                             <Text style={styles.Dstyle}>City: {users.City}</Text>
                         </View>}            
-                
-                    {views && <Button 
-                                title="Remove Request" 
+                        
+                    <View style={{margin: 8, flexDirection: 'row'}}>
+                        {views && <View style={{margin: 5, paddingLeft: 5}}>
+                            <Button 
+                                title="Remove Details" 
                                 color={"#fa8072"}
                                 size={25}
-                                onPress={removeData}
+                                onPress={removeDetails}
                                 disabled={!views}
-                                />}
+                                
+                                />
+                        </View>}
+
+                        {views && <View style={{margin: 5}}>
+                            <Button 
+                                title="Delete Ad" 
+                                color={"#fa8072"}
+                                size={25}
+                                onPress={DeleteData}
+                                disabled={!views}
+                                />
+                        </View>}
+                    </View>
                 </View>
             </View>
         </ScrollView>                                 
         </View>
     )
 
-    async function addTo()
+    async function DeleteData()
     {
-        const reference=firebase.firestore().collection("favorites").doc(uid).collection('myfav');
-
+        const reference=firebase.firestore().collection("ads");
+        
         try
         {
-            if(color === true)
-            {
-                try
-                {
-                    await reference.doc(subId).delete();
-                    
-                    //color set to white
-                    setColor(false);
-                    ToastAndroid.show('Removed from Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-                }
-                catch(e)
-                {
-                    ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-                }
-            }
-            else if(color === false)
-            {
-                try
-                {
-                    await reference.doc(subId).set({
-                        ProductId: id,
-                    },{merge: true});
-                
-                    //color set to red
-                    setColor(true);
-                    ToastAndroid.show('Added to Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-                }
-                catch(e)
-                {
-                    ToastAndroid.show('Network failed :(',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-                }
-            }
+            await reference.doc(id).delete();
+            
+            ToastAndroid.show('Removed from Database', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }
         catch(e)
         {
+            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
             ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }
     }
 
-    async function requestData()
-    {
-        const reference=firebase.firestore().collection("requests").doc(uid).collection("myRequest");
-        
+    async function requestDetails()
+    {        
         try
-        {
-            await reference.doc(subId).set({
-                ProductId:id,
-            });
-            
+        {            
             setViews(true);
-            ToastAndroid.show('Item Requested',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            ToastAndroid.show('Displaying Details',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
             Alert.alert(
                 'Important',
                 `Contact Details of the Donor will be shared with you. Do not misuse it\nThank You`,
@@ -181,16 +152,14 @@ export default function ItemDisplay({route,navigation})
         }
     }
 
-    async function removeData()
+    async function removeDetails()
     {
-        const reference=firebase.firestore().collection("requests").doc(uid).collection("myRequest");
 
         try
         {
-            await reference.doc(subId).delete();
-            ToastAndroid.show('Request Canceled', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
-            // this.setState({views: false});
+            ToastAndroid.show('Removing Details', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
             setViews(false);
+            this.props.navigation.navigate('DonorDetails');
         }
         catch(e)
         {
@@ -200,14 +169,6 @@ export default function ItemDisplay({route,navigation})
 }
 
 
-
-function uuidGenerator()
-{
-    return 'xyxyxyxxxxxy'.replace(/[xy]/g, function(c){
-      var a= Math.random() * 16 | 0,v = c == 'x' ? a: (a & 0x3|0x8);
-      return v.toString(16);
-    });
-}
 
 
 const styles= StyleSheet.create({
@@ -282,8 +243,8 @@ const styles= StyleSheet.create({
     },
     Simage:
     {
-        width: 280,
-        height: 280,
+        width: 290,
+        height: 290,
         paddingLeft: 5,
         marginLeft: 5,
     },
@@ -295,3 +256,4 @@ const styles= StyleSheet.create({
     }
   });
   
+export default AdminItemDisplay;

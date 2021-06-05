@@ -47,7 +47,7 @@ export class DonorDetails extends Component
           data={this.state.users}
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => (
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('ItemDisplay',{id: item.id})}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('AdminItemDisplay',{id: item.id})}>
               <View style={styles.Vstyle}>
                 <Image source={{uri: item.Image1}} style={{width: 100,height:100}}/>
                 <View style={styles.VInstyle}>
@@ -100,6 +100,8 @@ const styles= StyleSheet.create({
     margin:5,
   },
 });
+
+export default DonorDetails;
 
 // const DonorDetails=({route,navigation}) => 
 // {
@@ -216,4 +218,3 @@ const styles= StyleSheet.create({
 //   }
 // })
 
-export default DonorDetails;

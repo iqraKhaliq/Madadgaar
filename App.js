@@ -43,7 +43,8 @@ import EditProfile from './src/pages/EditProfile';
 import testPage from './src/pages/testPage';
 import DonorDetails from './src/pages/DonorDetails';
 import AdminDashboard from './src/pages/AdminDashboard';
-
+import AdminItemDisplay from './src/pages/AdminItemDisplay';
+import UserDetail from './src/pages/UserDetail';
 
 
 //for drawer navigation
@@ -95,8 +96,8 @@ function AdminStack()
           options={{
             title: 'Donated Items'}}/>
         <AdminS.Screen
-          name="ItemDisplay"
-          component={ItemDisplay}
+          name="AdminItemDisplay"
+          component={AdminItemDisplay}
           options={{
             title: 'Item Display'}}/>
         <AdminS.Screen
@@ -104,6 +105,16 @@ function AdminStack()
           component={FeedbackList}
           options={{
             title: 'Users Feedback'}}/>
+        <AdminS.Screen
+          name="Users"
+          component={Users}
+          options={{
+            title: 'Users List'}}/>
+        <AdminS.Screen
+          name="UserDetail"
+          component={UserDetail}
+          options={{
+            title: 'User Detail'}}/>
       </AdminS.Navigator>
   )
 }

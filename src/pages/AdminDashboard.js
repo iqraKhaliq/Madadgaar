@@ -19,6 +19,13 @@ export default class AdminDashboard extends React.Component
                     size={25}  
                     onPress={() => this.props.navigation.navigate('FeedbackList')}
                     />
+                <Button 
+                    color={"#fa8072"} 
+                    title="Users List"
+                    size={25}  
+                    onPress={() => this.props.navigation.navigate('Users')}
+                    />
+                  
             </View>
         )
     }
