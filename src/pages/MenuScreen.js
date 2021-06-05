@@ -163,7 +163,7 @@ const styles = StyleSheet.create
   },
   Vstyle:
   {
-    height: 150,
+    height: 170,
     // alignItems: 'flex-end',
     justifyContent: 'flex-end',
     backgroundColor: 'maroon',
@@ -182,7 +182,7 @@ const styles = StyleSheet.create
   Vsignout:
   {
     // height: 150,
-    marginTop:15,
+    marginTop:'110%',
     padding:5,
     justifyContent: 'flex-end',
     backgroundColor: 'maroon',
@@ -197,8 +197,9 @@ const styles = StyleSheet.create
     backgroundColor: 'maroon',
     paddingLeft: 20,
     width: 300,
-    margin: 2,
-    marginLeft: 5,
+    marginTop: '5%',
+    marginBottom: '5%',
+    marginLeft: 25,
     borderRadius:10,
     justifyContent: 'flex-end',
     flexDirection: 'column-reverse',
