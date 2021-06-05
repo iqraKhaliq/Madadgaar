@@ -16,6 +16,7 @@ export default function ItemDisplay({route,navigation})
     const [views,setViews]= useState(false);
     const [color,setColor]= useState(false);
     const [users,setUsers]= useState([]);
+    const [show,setShow]= useState(false);
 
     const itemData= async() =>{
         try
@@ -29,6 +30,7 @@ export default function ItemDisplay({route,navigation})
                             {
                                 console.log(snapShot.data());
                                 setUsers(snapShot.data());
+                                setShow(true);
                             }
                         })
         }

@@ -17,7 +17,7 @@ export class Categories extends React.Component
                 <View style={styling.container} >
                     <View style={styling.Vstyle2}>
                         <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false}>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryBooks')}>
                                 <View style={styling.Vstyle1}>
                                     <MaterialIcons 
                                         name="library-books" 
@@ -28,7 +28,7 @@ export class Categories extends React.Component
                                     <Text style={styling.Txt}>Books</Text>
                                 </View>
                             </Pressable>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryClothes')}>
                                 <View style={styling.Vstyle1}>
                                     <FontAwesome5 
                                         name="tshirt" 
@@ -39,7 +39,7 @@ export class Categories extends React.Component
                                     <Text style={styling.Txt}>Clothes</Text>
                                 </View>
                             </Pressable>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryStationary')}>
                                 <View style={styling.Vstyle1}>
                                     <FontAwesome5 
                                         name="toolbox"
@@ -50,7 +50,7 @@ export class Categories extends React.Component
                                     <Text style={styling.Txt}>Stationary</Text>
                                 </View>
                             </Pressable>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryAccessories')}>
                                 <View style={styling.Vstyle1}>
                                     <MaterialCommunityIcons 
                                         name="ring"
@@ -61,7 +61,7 @@ export class Categories extends React.Component
                                     <Text style={styling.Txt}>Accessories</Text>
                                 </View>
                             </Pressable>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryShoes')}>
                                 <View style={styling.Vstyle1}>
                                     <MaterialCommunityIcons 
                                         name="shoe-heel"
@@ -72,7 +72,7 @@ export class Categories extends React.Component
                                     <Text style={styling.Txt}>Shoes</Text>
                                 </View>
                             </Pressable>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryToys')}>
                                 <View style={styling.Vstyle1}>
                                     <MaterialCommunityIcons 
                                         name="baseball-bat"
@@ -83,7 +83,7 @@ export class Categories extends React.Component
                                     <Text style={styling.Txt}>Toys</Text>
                                 </View>
                             </Pressable>
-                            <Pressable onPress={()=> this.props.navigation.navigate('FilterData')}>
+                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryAll')}>
                                 <View style={styling.Vstyle1}>
                                     <MaterialCommunityIcons 
                                         name="wallet-travel"

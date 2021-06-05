@@ -34,7 +34,6 @@ import Categories from './src/pages/Categories';
 import ItemDisplay from './src/pages/ItemDisplay';
 import FeedbackList from './src/pages/FeedbackList';
 import Users from './src/pages/Users';
-import FilterDataList from './src/pages/FilterDataList';
 import Signin from './src/pages/Signin';
 import MyAds from './src/pages/myAds';
 import favorites from './src/pages/favorites';
@@ -45,6 +44,15 @@ import DonorDetails from './src/pages/DonorDetails';
 import AdminDashboard from './src/pages/AdminDashboard';
 import AdminItemDisplay from './src/pages/AdminItemDisplay';
 import UserDetail from './src/pages/UserDetail';
+
+import CategoryAll from './src/pages/categoryPages/CategoryAll';
+import CategoryShoes from './src/pages/categoryPages/CategoryShoes';
+import CategoryStationary from './src/pages/categoryPages/CategoryStationary';
+import CategoryToys from './src/pages/categoryPages/CategoryToys';
+import CategoryAccessories from './src/pages/categoryPages/CategoryAccessories';
+import CategoryBooks from './src/pages/categoryPages/CategoryBooks';
+import CategoryClothes from './src/pages/categoryPages/CategoryClothes';
+
 
 
 //for drawer navigation
@@ -227,6 +235,34 @@ function SearchStack()
               options={{ title: 'Search',
                 headerLeft: ()=> null, }}/>
             <Stack.Screen
+              name="CategoryAll"
+              component={CategoryAll}
+              options={{title: 'All'}}/>
+            <Stack.Screen
+              name="CategoryToys"
+              component={CategoryToys}
+              options={{title: 'Toys'}}/>
+              <Stack.Screen
+              name="CategoryStationary"
+              component={CategoryStationary}
+              options={{title: 'Stationary'}}/>
+              <Stack.Screen
+              name="CategoryShoes"
+              component={CategoryShoes}
+              options={{title: 'Shoes'}}/>
+              <Stack.Screen
+              name="CategoryClothes"
+              component={CategoryClothes}
+              options={{title: 'Clothes'}}/>
+              <Stack.Screen
+              name="CategoryBooks"
+              component={CategoryBooks}
+              options={{title: 'Books'}}/>
+              <Stack.Screen
+              name="CategoryAccessories"
+              component={CategoryAccessories}
+              options={{title: 'Accessories'}}/>
+            <Stack.Screen
               name="Suggestion"
               component={SuggestionScreen}
               options={{title: 'Suggestion & Feedback'}}/>
@@ -246,10 +282,6 @@ function SearchStack()
               name="ItemDisplay"
               component={ItemDisplay}
               options={{title: 'Item Display'}} />
-            <Stack.Screen
-              name="FilterData"
-              component={FilterDataList}
-              options={{title: 'Ads'}} />
             <Stack.Screen
               name="MyRequest"
               component={MyRequest}
@@ -289,10 +321,10 @@ function AccountStack()
               component={Profile}
               options={{ title: 'My Account',
                 headerLeft: ()=> null, }}/>
-            {/* <Stack.Screen
-              name="AdminStack"
-              component={AdminStack}
-              options={{title: 'Admin Dashboard'}}/> */}
+            <Stack.Screen
+              name="DonorDetails"
+              component={DonorDetails}
+              options={{title: 'Donated Items'}}/>
             <Stack.Screen
               name="FeedbackList"
               component={FeedbackList}
