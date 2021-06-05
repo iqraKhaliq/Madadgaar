@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { ScrollView, StyleSheet, Pressable, View, SafeAreaView,TouchableOpacity,Button } from 'react-native';
+import { ScrollView, StyleSheet, Pressable, View, SafeAreaView,TouchableOpacity,Button, ToastAndroid } from 'react-native';
 import {Avatar,Title, Caption,TouchableRipple,Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as firebase from "firebase";
@@ -10,9 +10,9 @@ const Profile = ({route,navigation}) => {
     const [data, setdata] = useState(null);
     const [loading, setLoading] = useState(true);
     const [B,setB] =useState(false);
+    const [countD,setCountD]= useState(0);
+    const [countR,setCountR]= useState(0);
     const user= firebase.auth().currentUser.uid;
-
-    
 
     const getUser = async() => 
     {
@@ -32,6 +32,23 @@ const Profile = ({route,navigation}) => {
             }
           })
 
+          await firebase.firestore()
+                        .collection('ads')
+                        .where('UserId', '==', user)
+                        .get()
+                        .then((doc) =>{
+                          setCountD(doc.size);
+                        });
+          
+          await firebase.firestore()
+                        .collection('requests')
+                        .doc(user)
+                        .collection('myRequest')
+                        .get()
+                        .then((doc) =>{
+                          setCountR(doc.size);
+                        });
+
         if(user == 'ydvD4MMj15cg3wTzh5wcPt1gtLy2')
         {
           setB(true);
@@ -39,7 +56,8 @@ const Profile = ({route,navigation}) => {
       }
       catch(e)
       {
-        alert('No Data Available');
+        // alert('No Data Available');
+        ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
       }
     }
   
@@ -102,7 +120,7 @@ const Profile = ({route,navigation}) => {
         <Title
             style={styles.menuItemText}
             onPress={()=> this.props.navigation.navigate('MyRequest')}
-            >2</Title>
+            >{countR}</Title>
         <Caption 
             style={{color: 'darkred'}}
             onPress={()=> this.props.navigation.navigate('MyRequest')}
@@ -111,46 +129,46 @@ const Profile = ({route,navigation}) => {
       <View style={styles.infoBox}>
         <Title
             style={styles.menuItemText}
-            onPress={()=> this.props.navigation.navigate('MyAds')}>2</Title>
+            onPress={()=> this.props.navigation.navigate('myAds')}>{countD}</Title>
         <Caption 
             style={{color:'darkred'}}
-            onPress={()=> this.props.navigation.navigate('MyAds')}
+            onPress={()=> this.props.navigation.navigate('myAds')}
             >Total Donated Objects</Caption>
       </View>
     </View>
     <View style={styles.menuWrapper}> 
-    <TouchableRipple onPress={() => {}}>
+    <TouchableRipple onPress={() => navigation.navigate('Favorites')}>
         <View style={styles.menuItem}>
           <Icon 
             name= "account-heart-outline" 
             color="red" 
             size={25} 
-            onPress={()=> this.props.navigation.navigate('favorites')}
+            // onPress={()=> this.props.navigation.navigate('favorites')}
             />
           <Text 
             style={styles.menuItemText}
-            onPress={()=> this.props.navigation.navigate('favorites')}
+            // onPress={()=> this.props.navigation.navigate('favorites')}
             >My Favorites</Text>
         </View>
     </TouchableRipple>
-    <TouchableRipple onPress={() => {}}>
+    <TouchableRipple onPress={() => navigation.navigate('MyAds')}>
         <View style={styles.menuItem}>
           <Icon name= "account-plus-outline" color="red" size={25} />
           <Text style={styles.menuItemText}>My Ads</Text>
         </View>
     </TouchableRipple>
     
-    <TouchableRipple onPress={() => {}}>
+    <TouchableRipple onPress={() => navigation.navigate('MyRequest')}>
         <View style={styles.menuItem}>
           <Icon 
             name= "account-star-outline" 
             color="red" 
             size={25} 
-            onPress={()=> this.props.navigation.navigate('MyRequest')}
+            // onPress={()=> this.props.navigation.navigate('MyRequest')}
             />
           <Text 
             style={styles.menuItemText}
-            onPress={()=> this.props.navigation.navigate('MyRequest')}
+            // onPress={()=> this.props.navigation.navigate('MyRequest')}
             >My Requests</Text>
         </View>
     </TouchableRipple>

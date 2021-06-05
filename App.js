@@ -174,6 +174,11 @@ function HomeStack()
             name="Help"
             component={HelpPage}
             options={{title: 'Help'}} />
+          <Stack.Screen
+            name="AdminItemDisplay"
+            component={AdminItemDisplay}
+            options={{
+              title: 'Item Display'}}/>
       </Stack.Navigator>
   );
 }
@@ -211,6 +216,11 @@ function PostAdStack()
               name="MyRequest"
               component={MyRequest}
               options={{title: 'My Requests'}} />
+            <Stack.Screen
+              name="AdminItemDisplay"
+              component={AdminItemDisplay}
+              options={{
+                title: 'Item Display'}}/>
             <Stack.Screen
               name="MyAds"
               component={MyAds}
@@ -262,26 +272,31 @@ function SearchStack()
               name="CategoryToys"
               component={CategoryToys}
               options={{title: 'Toys'}}/>
-              <Stack.Screen
+            <Stack.Screen
               name="CategoryStationary"
               component={CategoryStationary}
               options={{title: 'Stationary'}}/>
-              <Stack.Screen
+            <Stack.Screen
               name="CategoryShoes"
               component={CategoryShoes}
               options={{title: 'Shoes'}}/>
-              <Stack.Screen
+            <Stack.Screen
               name="CategoryClothes"
               component={CategoryClothes}
               options={{title: 'Clothes'}}/>
-              <Stack.Screen
+            <Stack.Screen
               name="CategoryBooks"
               component={CategoryBooks}
               options={{title: 'Books'}}/>
-              <Stack.Screen
+            <Stack.Screen
               name="CategoryAccessories"
               component={CategoryAccessories}
               options={{title: 'Accessories'}}/>
+            <Stack.Screen
+              name="AdminItemDisplay"
+              component={AdminItemDisplay}
+              options={{
+                title: 'Item Display'}}/>
             <Stack.Screen
               name="Suggestion"
               component={SuggestionScreen}
@@ -345,6 +360,11 @@ function AccountStack()
               name="DonorDetails"
               component={DonorDetails}
               options={{title: 'Donated Items'}}/>
+            <Stack.Screen
+              name="AdminItemDisplay"
+              component={AdminItemDisplay}
+              options={{
+                title: 'Item Display'}}/>
             <Stack.Screen
               name="FeedbackList"
               component={FeedbackList}
