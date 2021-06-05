@@ -32,7 +32,7 @@ export default class helpPage extends React.Component
                     </View>
                 </Pressable>
                
-                <Pressable>
+                <Pressable onPress={()=>this.props.navigation.navigate('FAQ')}>
                     <View style={styl.Vstyl2}>
                         <Text style={styl.Tstyl}><AntDesign name='questioncircleo' color='darkred' size={20}  /> FAQ's </Text>
                         <AntDesign name='doubleright' color='darkred' size={20} />

@@ -131,7 +131,7 @@ function HomeStack()
 {
   return (
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="Main"
         screenOptions={{
           headerStyle: { backgroundColor: '#bd4039' },
           headerTintColor: '#fff',
@@ -146,10 +146,6 @@ function HomeStack()
             name="ItemDisplay"
             component={ItemDisplay}
             options={{title: 'Item Display'}} />
-          <Stack.Screen
-            name="details"
-            component={DonorDetails}
-            options={{title: 'Details'}} />
           <Stack.Screen
             name="Suggestion"
             component={SuggestionScreen}
@@ -166,6 +162,18 @@ function HomeStack()
             name="Favorites"
             component={favorites}
             options={{title: 'My Favorites'}} />
+          <Stack.Screen
+            name="FAQ"
+            component={FAQpage}
+            options={{title: 'FAQ'}} />
+          <Stack.Screen
+            name="Contact"
+            component={ContactPage}
+            options={{title: 'Contact Us'}} />
+          <Stack.Screen
+            name="Help"
+            component={HelpPage}
+            options={{title: 'Help'}} />
       </Stack.Navigator>
   );
 }
@@ -215,6 +223,18 @@ function PostAdStack()
               name="Suggestion"
               component={SuggestionScreen}
               options={{title: 'Suggestion & Feedback'}}/>
+            <Stack.Screen
+              name="FAQ"
+              component={FAQpage}
+              options={{title: 'FAQ'}} />
+            <Stack.Screen
+              name="Contact"
+              component={ContactPage}
+              options={{title: 'Contact Us'}} />
+            <Stack.Screen
+              name="Help"
+              component={HelpPage}
+              options={{title: 'Help'}} />
         </Stack.Navigator>
     );
 }
@@ -333,6 +353,34 @@ function AccountStack()
               name="Users"
               component={Users}
               options={{title: 'Users List'}} />
+            <Stack.Screen
+              name="FAQ"
+              component={FAQpage}
+              options={{title: 'FAQ'}} />
+            <Stack.Screen
+              name="Contact"
+              component={ContactPage}
+              options={{title: 'Contact Us'}} />
+            <Stack.Screen
+              name="Help"
+              component={HelpPage}
+              options={{title: 'Help'}} />
+            <Stack.Screen
+              name="Suggestion"
+              component={SuggestionScreen}
+              options={{title: 'Suggestion & Feedback'}}/>
+            <Stack.Screen
+              name="MyRequest"
+              component={MyRequest}
+              options={{title: 'My Requests'}} />
+            <Stack.Screen
+              name="MyAds"
+              component={MyAds}
+              options={{title: 'My Ads'}} />
+            <Stack.Screen
+              name="Favorites"
+              component={favorites}
+              options={{title: 'My Favorites'}} />
         </Stack.Navigator>
     );
 }

@@ -1,5 +1,5 @@
 import React,{Component,useEffect,useState} from 'react';
-import {TouchableOpacity,StyleSheet,View,Text,SafeAreaView,ScrollView, ImageBackground} from 'react-native';
+import {TouchableOpacity,StyleSheet,View,Text,SafeAreaView,ScrollView, ImageBackground, ToastAndroid} from 'react-native';
 import Logo from '../components/Logo';
 import * as firebase from "firebase";
 
@@ -8,9 +8,8 @@ export function MenuScreen({navigation})
   const [data,setData]= useState(null);
   const [loading, setLoading] = useState(true);
 
-  const uid= firebase.auth().currentUser.uid;
-
   const getUser= async()=>{
+    const uid= firebase.auth().currentUser.uid;
     try
       {
         await
@@ -70,41 +69,6 @@ export function MenuScreen({navigation})
               <Text style={styles.txtStyl}>test</Text>
             </TouchableOpacity>
             
-            {/* <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Main')}
-              >
-              <Text style={styles.txtStyl}>Ads</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Categories')}
-              >
-              <Text style={styles.txtStyl}>Categories</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Users')}
-              >
-              <Text style={styles.txtStyl}>Users List</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Profile')}
-              >
-              <Text style={styles.txtStyl}>Profile</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('EditProfile')}
-              >
-              <Text style={styles.txtStyl}>Edit Profile</Text>
-            </TouchableOpacity> */}
-            
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('Suggestion')}
@@ -145,34 +109,6 @@ export function MenuScreen({navigation})
               <Text style={styles.txtStyl}>My Favorites</Text>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Home')}
-              >
-              <Text style={styles.txtStyl}>Go to Home Tab</Text>
-            </TouchableOpacity>
-          
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Signin')}
-              >
-              <Text style={styles.txtStyl}>Sign In</Text>
-            </TouchableOpacity>
-          
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Signup')}
-              >
-              <Text style={styles.txtStyl}>Sign Up</Text>
-            </TouchableOpacity> */}
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('FeedbackList')}
-              >
-              <Text style={styles.txtStyl}>Feedback List</Text>
-            </TouchableOpacity>
-
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('FAQ')}
@@ -183,7 +119,7 @@ export function MenuScreen({navigation})
             <View style={styles.Vsignout}>
               <TouchableOpacity
                 style={styles.signout}
-                onPress={() => alert('signing out ...')}
+                onPress={signout}
                 >
                 <Text style={styles.txtSignout}>Sign Out</Text>
               </TouchableOpacity>
@@ -193,6 +129,18 @@ export function MenuScreen({navigation})
         </SafeAreaView>
       </View>
   );
+
+  async function signout()
+  {
+    firebase.auth().signOut().then(() =>
+    {
+      ToastAndroid.show('Signing Out',ToastAndroid.LONG,ToastAndroid.BOTTOM);
+      navigation.navigate('Signin');
+    }).catch((e) =>
+    {
+      ToastAndroid.show('Signing Out Failed',ToastAndroid.LONG,ToastAndroid.BOTTOM);
+    })
+  }
 }
 
 const styles = StyleSheet.create
