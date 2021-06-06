@@ -55,7 +55,7 @@ export function MenuScreen({navigation})
             <Text style={styles.VTstyle}>Welcome {data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Text>
           </View>
 
-          <TouchableOpacity
+          {/* <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('details')}
               >
@@ -67,7 +67,7 @@ export function MenuScreen({navigation})
               onPress={() => navigation.navigate('test')}
               >
               <Text style={styles.txtStyl}>test</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             
             <TouchableOpacity
               style={styles.button}
@@ -182,7 +182,7 @@ const styles = StyleSheet.create
   Vsignout:
   {
     // height: 150,
-    marginTop:'110%',
+    marginTop:'130%',
     padding:5,
     justifyContent: 'flex-end',
     backgroundColor: 'maroon',

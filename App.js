@@ -39,11 +39,14 @@ import MyAds from './src/pages/myAds';
 import favorites from './src/pages/favorites';
 import MyRequest from './src/pages/MyRequest';
 import EditProfile from './src/pages/EditProfile';
-import testPage from './src/pages/testPage';
+// import testPage from './src/pages/testPage';
 import DonorDetails from './src/pages/DonorDetails';
 import AdminDashboard from './src/pages/AdminDashboard';
 import AdminItemDisplay from './src/pages/AdminItemDisplay';
 import UserDetail from './src/pages/UserDetail';
+import myFavoritesDisplay from './src/pages/myFavoritesDisplay';
+import myRequestDisplay from './src/pages/myRequestDisplay';
+import myAdsDisplay from './src/pages/myAdsDisplay';
 
 import CategoryAll from './src/pages/categoryPages/CategoryAll';
 import CategoryShoes from './src/pages/categoryPages/CategoryShoes';
@@ -143,6 +146,10 @@ function HomeStack()
             options={{title: 'Home',
               headerLeft: ()=> null,}} />
           <Stack.Screen
+            name="myAdsDisplay"
+            component={myAdsDisplay}
+            options={{title: 'Item Display'}} />
+          <Stack.Screen
             name="ItemDisplay"
             component={ItemDisplay}
             options={{title: 'Item Display'}} />
@@ -177,6 +184,16 @@ function HomeStack()
           <Stack.Screen
             name="AdminItemDisplay"
             component={AdminItemDisplay}
+            options={{
+              title: 'Item Display'}}/>
+          <Stack.Screen
+            name="myFavoritesDisplay"
+            component={myFavoritesDisplay}
+            options={{
+              title: 'Item Display'}}/>
+          <Stack.Screen
+            name="myRequestDisplay"
+            component={myRequestDisplay}
             options={{
               title: 'Item Display'}}/>
       </Stack.Navigator>
@@ -245,6 +262,20 @@ function PostAdStack()
               name="Help"
               component={HelpPage}
               options={{title: 'Help'}} />
+            <Stack.Screen
+              name="myFavoritesDisplay"
+              component={myFavoritesDisplay}
+              options={{
+                title: 'Item Display'}}/>
+            <Stack.Screen
+              name="myRequestDisplay"
+              component={myRequestDisplay}
+              options={{
+                title: 'Item Display'}}/>
+            <Stack.Screen
+              name="myAdsDisplay"
+              component={myAdsDisplay}
+              options={{title: 'Item Display'}} />
         </Stack.Navigator>
     );
 }
@@ -330,13 +361,27 @@ function SearchStack()
               component={favorites}
               options={{title: 'My Favorites'}} />
             <Stack.Screen
-              name="test"
-              component={testPage}
-              options={{title: 'test'}} />
-            <Stack.Screen
               name="details"
               component={DonorDetails}
               options={{title: 'Details'}} />
+            <Stack.Screen
+              name="myFavoritesDisplay"
+              component={myFavoritesDisplay}
+              options={{
+                title: 'Item Display'}}/>
+            <Stack.Screen
+              name="myRequestDisplay"
+              component={myRequestDisplay}
+              options={{
+                title: 'Item Display'}}/>
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{title: 'Edit Profile'}} />
+            <Stack.Screen
+              name="myAdsDisplay"
+              component={myAdsDisplay}
+              options={{title: 'Item Display'}} />
         </Stack.Navigator>
     );
 }
@@ -401,6 +446,24 @@ function AccountStack()
               name="Favorites"
               component={favorites}
               options={{title: 'My Favorites'}} />
+            <Stack.Screen
+              name="myFavoritesDisplay"
+              component={myFavoritesDisplay}
+              options={{
+                title: 'Item Display'}}/>
+            <Stack.Screen
+              name="myRequestDisplay"
+              component={myRequestDisplay}
+              options={{
+                title: 'Item Display'}}/>
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{title: 'Edit Profile'}} />
+            <Stack.Screen
+              name="myAdsDisplay"
+              component={myAdsDisplay}
+              options={{title: 'Item Display'}} />
         </Stack.Navigator>
     );
 }

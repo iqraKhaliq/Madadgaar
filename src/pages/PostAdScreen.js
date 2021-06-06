@@ -12,15 +12,7 @@ return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={{ flex: 1 }}>
         <View style={styles.main}>
-        {/* <Logo/> */}
-          
-
-          {/* <Text style={styles.txtStyl}> POST AD </Text> */}
             <Form type="PostAdForm"/>
-            {/* <Button color={"#fa8072"} title="SUBMIT"  style={styles.buttonStyl}/> */}
-
-        
-          
         </View>
      </View>
     </SafeAreaView>

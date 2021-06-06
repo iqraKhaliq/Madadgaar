@@ -58,129 +58,133 @@ async componentDidMount()
 
     return (
       <View style={styles.viewer}>
-          <View style={styles.viewer2}>
-                <ScrollView 
-                  horizontal={true}
-                  showsHorizontalScrollIndicator={false}
-                  > 
-                  {!!image1 && <Image source={{ uri: image1 }} style={styles.ImgSytl} />}
-                  {!!image2 && <Image source={{ uri: image2 }} style={styles.ImgSytl} />}
-                  {!!image3 && <Image source={{ uri: image3 }} style={styles.ImgSytl} />}
-                  {!!image4 && <Image source={{ uri: image4 }} style={styles.ImgSytl} />}
-                </ScrollView>  
-          </View>
-          
-          <Button 
-            color={"#fa8072"} 
-            title="Pick an image"  
-            onPress={this.pickImg} 
-            style={styles.buttonStyl} 
-            />
-  
-  
-          <Text style={styles.txtStyl}>For Additional Images:</Text>
-          <ScrollView 
-            horizontal={true} 
-            style={styles.scrllvw} 
-            showsHorizontalScrollIndicator={false}
-            >
-                  <MaterialIcons 
-                    name="add-a-photo" 
-                    size={40} 
-                    color="darkred"  
-                    onPress={this.pickImg2}  
-                    style={styles.icn} 
-                    />
-                  {!!image2 &&  
-                  <MaterialIcons 
-                    name="add-a-photo" 
-                    size={40} 
-                    color="darkred"  
-                    onPress={this.pickImg3}  
-                    style={styles.icn} 
-                    />}
-                  {!!image3 &&
-                  <MaterialIcons 
-                    name="add-a-photo" 
-                    size={40} 
-                    color="darkred"  
-                    onPress={this.pickImg4}  
-                    style={styles.icn} 
-                    />}
-          </ScrollView>
-  
-          <ScrollView 
-            vertical={true}
-            showsVerticalScrollIndicator={false}
-            >
-              <TextInput 
-                style={styles.TextInput} 
-                placeholder='PRODUCT NAME' 
-                placeholderTextColor='#c4332b'
-                onChangeText={(productName) => this.setState({productName})}
-                value={this.state.productName}
-                />
-              <Picker 
-                mode="dropdown"
-                selectedValue={this.state.list}
-                style={{height:40, width: 340}}
-                backgroundColor={'#e9967a'}
-                style={styles.dropStyle}
-                onValueChange={(itmVal) => {this.updateList(itmVal);}}
-                placeholder='Select Category' 
-                >
-                  <Picker.Item label="Select Category" />
-                  <Picker.Item label="Accessories" value="accessories"/>
-                  <Picker.Item label="Books" value="books"/>
-                  <Picker.Item label="Stationary" value="stationary"/>
-                  <Picker.Item label="Clothes" value="clothes"/>
-                  <Picker.Item label="Shoes" value="shoes"/>
-                  <Picker.Item label="Toys" value="toys" />
-                  <Picker.Item label="All" value="all" />
-              </Picker>
-              <TextInput 
-                style={styles.TextInput} 
-                multiline={true} 
-                placeholder='DESCRIPTION' 
-                placeholderTextColor='#c4332b'
-                onChangeText={(description) => this.setState({description})}
-                value={this.state.description}
-                />
-              <TextInput 
-                style={styles.TextInput} 
-                placeholder='DONOR NAME' 
-                placeholderTextColor='#c4332b'
-                onChangeText={(donorName) => this.setState({donorName})}
-                value={this.state.donorName}
-                />
-              <TextInput 
-                style={styles.TextInput} 
-                placeholder='PHONE NUMBER' 
-                keyboardType='number-pad'
-                placeholderTextColor='#c4332b'
-                onChangeText={(phone) => this.setState({phone})}
-                value={this.state.phone}
-                />
-              <TextInput 
-                style={styles.TextInput} 
-                placeholder='AREA' 
-                placeholderTextColor='#c4332b'
-                onChangeText={(area) => this.setState({area})}
-                value={this.state.area}
-                />
-              <TextInput 
-                style={styles.TextInput} 
-                placeholder='CITY' 
-                placeholderTextColor='#c4332b'
-                onChangeText={(city) => this.setState({city})}
-                value={this.state.city}
-                />        
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.viewer}>
+              <View style={styles.viewer2}>
+                    <ScrollView 
+                      horizontal={true}
+                      showsHorizontalScrollIndicator={false}
+                      > 
+                      {!!image1 && <Image source={{ uri: image1 }} style={styles.ImgSytl} />}
+                      {!!image2 && <Image source={{ uri: image2 }} style={styles.ImgSytl} />}
+                      {!!image3 && <Image source={{ uri: image3 }} style={styles.ImgSytl} />}
+                      {!!image4 && <Image source={{ uri: image4 }} style={styles.ImgSytl} />}
+                    </ScrollView>  
+              </View>
+              
               <Button 
                 color={"#fa8072"} 
-                title="SUBMIT"  
+                title="Pick an image"  
+                onPress={this.pickImg} 
                 style={styles.buttonStyl} 
-                onPress={this.addData} 
                 />
+      
+      
+              <Text style={styles.txtStyl}>For Additional Images:</Text>
+              <ScrollView 
+                horizontal={true} 
+                style={styles.scrllvw} 
+                showsHorizontalScrollIndicator={false}
+                >
+                      <MaterialIcons 
+                        name="add-a-photo" 
+                        size={40} 
+                        color="darkred"  
+                        onPress={this.pickImg2}  
+                        style={styles.icn} 
+                        />
+                      {!!image2 &&  
+                      <MaterialIcons 
+                        name="add-a-photo" 
+                        size={40} 
+                        color="darkred"  
+                        onPress={this.pickImg3}  
+                        style={styles.icn} 
+                        />}
+                      {!!image3 &&
+                      <MaterialIcons 
+                        name="add-a-photo" 
+                        size={40} 
+                        color="darkred"  
+                        onPress={this.pickImg4}  
+                        style={styles.icn} 
+                        />}
+              </ScrollView>
+      
+              <ScrollView 
+                vertical={true}
+                showsVerticalScrollIndicator={false}
+                >
+                  <TextInput 
+                    style={styles.TextInput} 
+                    placeholder='PRODUCT NAME' 
+                    placeholderTextColor='#c4332b'
+                    onChangeText={(productName) => this.setState({productName})}
+                    value={this.state.productName}
+                    />
+                  <Picker 
+                    mode="dropdown"
+                    selectedValue={this.state.list}
+                    style={{height:40, width: 340}}
+                    backgroundColor={'#e9967a'}
+                    style={styles.dropStyle}
+                    onValueChange={(itmVal) => {this.updateList(itmVal);}}
+                    placeholder='Select Category' 
+                    >
+                      <Picker.Item label="Select Category" />
+                      <Picker.Item label="Accessories" value="accessories"/>
+                      <Picker.Item label="Books" value="books"/>
+                      <Picker.Item label="Stationary" value="stationary"/>
+                      <Picker.Item label="Clothes" value="clothes"/>
+                      <Picker.Item label="Shoes" value="shoes"/>
+                      <Picker.Item label="Toys" value="toys" />
+                      <Picker.Item label="All" value="all" />
+                  </Picker>
+                  <TextInput 
+                    style={styles.TextInput} 
+                    multiline={true} 
+                    placeholder='DESCRIPTION' 
+                    placeholderTextColor='#c4332b'
+                    onChangeText={(description) => this.setState({description})}
+                    value={this.state.description}
+                    />
+                  <TextInput 
+                    style={styles.TextInput} 
+                    placeholder='DONOR NAME' 
+                    placeholderTextColor='#c4332b'
+                    onChangeText={(donorName) => this.setState({donorName})}
+                    value={this.state.donorName}
+                    />
+                  <TextInput 
+                    style={styles.TextInput} 
+                    placeholder='PHONE NUMBER' 
+                    keyboardType='number-pad'
+                    placeholderTextColor='#c4332b'
+                    onChangeText={(phone) => this.setState({phone})}
+                    value={this.state.phone}
+                    />
+                  <TextInput 
+                    style={styles.TextInput} 
+                    placeholder='AREA' 
+                    placeholderTextColor='#c4332b'
+                    onChangeText={(area) => this.setState({area})}
+                    value={this.state.area}
+                    />
+                  <TextInput 
+                    style={styles.TextInput} 
+                    placeholder='CITY' 
+                    placeholderTextColor='#c4332b'
+                    onChangeText={(city) => this.setState({city})}
+                    value={this.state.city}
+                    />        
+                  <Button 
+                    color={"#fa8072"} 
+                    title="SUBMIT"  
+                    style={styles.buttonStyl} 
+                    onPress={this.addData} 
+                    />
+              </ScrollView>
+            </View>
           </ScrollView>    
       </View>
     );

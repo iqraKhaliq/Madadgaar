@@ -1,185 +1,124 @@
-import React from 'react';
-import {Component} from 'react';
-import {View,Text,StyleSheet, Pressable} from 'react-native';
-import {FontAwesome5, MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
-import Form  from '../components/GetLocation';
-import faker from 'faker';
-import { Dimensions,Image, TouchableOpacity} from 'react-native';
-import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
-import { ScrollView } from 'react-native-gesture-handler';
+import React,{Component,useState,useEffect} from "react";
+import { StatusBar } from 'expo-status-bar';
+import {View, Text, StyleSheet, ScrollView,FlatList,Image,TouchableOpacity} from "react-native";
+import * as firebase from "firebase";
 
-//constants 
-const Screen_width=Dimensions.get("window").width;
-
-export class MyRequest extends React.Component
+export class MyRequest extends Component
 {
+  state={
+    users: [],
+    show: false,
+  };
 
-    constructor(props)
-    {
-        super(props);
+  constructor(props)
+  {
+    super(props);
+    const uid=firebase.auth().currentUser.uid;
 
-        const fakeData= [];
-        for(var a=0 ; a<2 ; a+= 1)
-        {
-            fakeData.push({
-                type: 'NORMAL',
-                item:{
-                    id: a,
-                    image: faker.random.image(),
-                    name:faker.commerce.productName() ,
-                    // lastName: faker.name.lastName(),
-                },
-            });
-        }
+    this.subscriber= firebase.firestore()
+                              .collection('requests')
+                              .doc(uid)
+                              .collection('myRequest')
+                              .get()
+                              .then(doc => {
+                                let users=[];
+                                doc.forEach(docs => {
+                                  if(docs.exists)
+                                  {
+                                    const {Image1,ProductName,Description}=docs.data();
+                                    // console.log(doc.data());
+                                    users.push({
+                                      id: docs.id,
+                                      Image1,
+                                      ProductName,
+                                      Description,
+                                    });
+                                    this.setState({show: true});
+                                  }
+                                });
+                                this.setState({users});
+                                console.log(users);
+                              });
 
-        this.state={
-            list:new DataProvider((r1,r2)=> r1!== r2).cloneWithRows(fakeData),
-        };
+  }
 
-        this.layoutProvider=new LayoutProvider((a)=>{
-            return this.state.list.getDataForIndex(a).type;
-        },
-        (type,dim)=>{
-            switch(type)
-                {
-                    case 'NORMAL':
-                        {
-                            dim.width=Screen_width;
-                            dim.height= 100;
-                            break;
-                        }
-                    default:
-                        {
-                            dim.width= 1;
-                            dim.height= 1;
-                            break;
-                        }
-                };
-            }
-        )
-    }
-    
-    rowRenderer=(type,data) => {
-        const {image, name} = data.item;
-        return(
-            <TouchableOpacity onPress={()=>this.props.navigation.navigate('ItemDisplay',this.id,this.image,this.name)}>
-                <View style={styling.right}>
-                    <Image source={{uri:image}} style={styling.image} />
-                    <View style={styling.left}>
-                        <Text style={styling.describe1}>{name} </Text>
-                        {/* <Text style={styling.describe2}>{</Text> */}
-                    </View>
+  render()
+  {
+    return(
+      <View style={StyleSheet.container}>
+        {this.state.show == false && 
+            <Text style={styles.Nodisplay}>Sorry :( Nothing to Display</Text>}
+
+        <FlatList
+          style={styles.container}
+          data={this.state.users}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('myRequestDisplay',{id: item.id})}>
+              <View style={styles.Vstyle}>
+                <Image source={{uri: item.Image1}} style={{width: 100,height:100}}/>
+                <View style={styles.VInstyle}>
+                  <Text style={styles.Fstyle}>{item.ProductName}</Text>
+                  <Text style={styles.Estyle}>{item.Description}</Text>
                 </View>
+              </View>
             </TouchableOpacity>
-        )
-    }
-
-    render()
-    {
-        return(
-            <View style={styling.mainV}>
-                <View style={styling.container} >
-                    <Pressable  style={styling.container} > 
-                        <RecyclerListView
-                            style={{flex:1}}
-                            rowRenderer={this.rowRenderer}
-                            dataProvider={this.state.list}
-                            layoutProvider={this.layoutProvider}
-                            showsVerticalScrollIndicator={false}
-                        />
-                    </Pressable>
-                </View>
-
-            </View>
-        );
-    }
+          )}
+          />
+      </View>
+    );
+  }
 }
 
-const styling= StyleSheet.create({
-    vst:
-    {
-        backgroundColor: '#fa8072',
-        padding: 5,
-        margin:5,
-        fontSize:20,
-        color: 'white',
-        width:100,
-        alignItems: 'center',
-        justifyContent:'center',
-    },
-    vt:
-    {
-        marginLeft:5,
-    },
-    mainV:
-    {
-        padding:10,
-        backgroundColor:'#fffaf0',
-        height:'100%',
-    },
-    Txtlocation:
-    {
-        justifyContent: 'flex-start',
-        // marginLeft:'20%',
-        
-    },
-
-    left:
-    {
-        flex:1,
-        alignItems: 'baseline',
-        justifyContent: 'space-around',
-        color: 'darkred',
-        paddingTop: 3,
-        marginTop: 3,
-        paddingBottom:3,
-        marginBottom:3,
-        paddingLeft:5,
-    },
-    right:
-    {
-        paddingTop: 3,
-        marginTop: 3,
-        paddingBottom:3,
-        marginBottom:3,
-        paddingLeft:5,
-        flexDirection:'row',   
-        backgroundColor:'#ffe4c4',
- 
-    },
-    container:
-    {
-        minHeight: 1,
-        minWidth:1,
-        flex: 1,
-        backgroundColor:'#fffaf0',
-        padding: 2,
-    },
-    image:
-    {
-        height: 80,
-        width: 80,
-    },
-    describe1:
-    {
-        fontSize: 25,
-        color: 'darkred',
-        fontStyle:'italic',
-        fontWeight:'bold',
-    },
-    describe2:
-    {
-        fontSize: 20,
-        color: '#dc143c',
-        padding:3,
-        margin:3,
-    },
-    icn:
-    {
-        marginTop: 5,
-        paddingVertical:20,
-        marginLeft:10,
-    },
+const styles= StyleSheet.create({
+  container:
+  {
+    backgroundColor: 'white',
+    padding:10,
+    flexDirection:'column',
+    marginBottom:10,
+    // margin:10,
+  },
+  Vstyle:
+  {
+    backgroundColor: 'darksalmon',
+    padding:5,
+    margin:5,
+    flexDirection:'row',
+  },
+  VInstyle:
+  {
+    backgroundColor: 'darksalmon',
+    flexDirection:'column',
+    paddingLeft:8,
+  },
+  Estyle:
+  {
+    fontSize: 20,
+    color: 'maroon',
+    // padding: 10,
+    margin:5,
+  },
+  Fstyle:
+  {
+    fontSize: 30,
+    color: 'maroon',
+    // padding: 10,
+    margin:5,
+  },
+  Nodisplay:
+  {
+    alignItems: 'center',
+    alignContent: 'center',
+    color: 'maroon',
+    fontSize: 30,
+    fontWeight: '500',
+    backgroundColor: 'white',
+    paddingTop: '70%',
+    paddingLeft: '15%',
+    // margin: 50,
+    height: '100%',
+  },
 });
 
 export default MyRequest;

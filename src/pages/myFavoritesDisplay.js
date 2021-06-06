@@ -6,7 +6,7 @@ import * as firebase from "firebase";
 //id created for item
 // global.subId= uuidGenerator();
 
-export default function ItemDisplay({route,navigation})
+export default function myFavoritesDisplay({route,navigation})
 {
     //product selected id
     const {id}= route.params;
@@ -22,7 +22,9 @@ export default function ItemDisplay({route,navigation})
         try
         {
             await firebase.firestore()
-                        .collection('ads')
+                        .collection('favorites')
+                        .doc(uid)
+                        .collection('myfav')
                         .doc(id)
                         .get()
                         .then(snapShot =>{
@@ -74,7 +76,7 @@ export default function ItemDisplay({route,navigation})
                         <MaterialCommunityIcons 
                             name='cards-heart' 
                             size={30} 
-                            color={color ? "red": "white"}  
+                            color={color ? "white": "red"}  
                             style={styles.icon} 
                             onPress={addTo}
                             />
@@ -117,14 +119,14 @@ export default function ItemDisplay({route,navigation})
 
         try
         {
-            if(color === true)
+            if(color === false)
             {
                 try
                 {
                     await reference.doc(id).delete();
                     
                     //color set to white
-                    setColor(false);
+                    setColor(true);
                     ToastAndroid.show('Removed from Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
                 catch(e)
@@ -132,33 +134,23 @@ export default function ItemDisplay({route,navigation})
                     ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
             }
-            else if(color === false)
-            {
-                try
-                {
-                    await reference.doc(id).set({
-                        ProductId: id,
-                        Image1: users.Image1,
-                        Image2: users.Image2,
-                        Image3: users.Image3,
-                        Image4: users.Image4,
-                        Area: users.Area,
-                        City: users.City,
-                        DonorName:users.DonorName,
-                        Description: users.Description,
-                        Phone: users.Phone,
-                        ProductName: users.ProductName,
-                    },{merge: true});
+            // else if(color === false)
+            // {
+            //     try
+            //     {
+            //         await reference.doc(id).set({
+            //             ProductId: id,
+            //         },{merge: true});
                 
-                    //color set to red
-                    setColor(true);
-                    ToastAndroid.show('Added to Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-                }
-                catch(e)
-                {
-                    ToastAndroid.show('Network failed :(',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-                }
-            }
+            //         //color set to red
+            //         setColor(true);
+            //         ToastAndroid.show('Added to Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            //     }
+            //     catch(e)
+            //     {
+            //         ToastAndroid.show('Network failed :(',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            //     }
+            // }
         }
         catch(e)
         {
