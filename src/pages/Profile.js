@@ -119,20 +119,20 @@ const Profile = ({route,navigation}) => {
       <View style={styles.infoBox}>
         <Title
             style={styles.menuItemText}
-            onPress={()=> this.props.navigation.navigate('MyRequest')}
+            onPress={()=> navigation.navigate('MyRequest')}
             >{countR}</Title>
         <Caption 
             style={{color: 'darkred'}}
-            onPress={()=> this.props.navigation.navigate('MyRequest')}
+            onPress={()=> navigation.navigate('MyRequest')}
             >Total Requests Made</Caption>
       </View>
       <View style={styles.infoBox}>
         <Title
             style={styles.menuItemText}
-            onPress={()=> this.props.navigation.navigate('myAds')}>{countD}</Title>
+            onPress={()=> navigation.navigate('myAds')}>{countD}</Title>
         <Caption 
             style={{color:'darkred'}}
-            onPress={()=> this.props.navigation.navigate('myAds')}
+            onPress={()=> navigation.navigate('myAds')}
             >Total Donated Objects</Caption>
       </View>
     </View>

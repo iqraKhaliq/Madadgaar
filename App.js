@@ -47,6 +47,7 @@ import UserDetail from './src/pages/UserDetail';
 import myFavoritesDisplay from './src/pages/myFavoritesDisplay';
 import myRequestDisplay from './src/pages/myRequestDisplay';
 import myAdsDisplay from './src/pages/myAdsDisplay';
+import UpdateAd from './src/pages/UpdateAd';
 
 import CategoryAll from './src/pages/categoryPages/CategoryAll';
 import CategoryShoes from './src/pages/categoryPages/CategoryShoes';
@@ -150,6 +151,10 @@ function HomeStack()
             component={myAdsDisplay}
             options={{title: 'Item Display'}} />
           <Stack.Screen
+            name="UpdateAd"
+            component={UpdateAd}
+            options={{title: 'Update Ad'}} />
+          <Stack.Screen
             name="ItemDisplay"
             component={ItemDisplay}
             options={{title: 'Item Display'}} />
@@ -233,6 +238,10 @@ function PostAdStack()
               name="MyRequest"
               component={MyRequest}
               options={{title: 'My Requests'}} />
+            <Stack.Screen
+              name="UpdateAd"
+              component={UpdateAd}
+              options={{title: 'Update Ad'}} />
             <Stack.Screen
               name="AdminItemDisplay"
               component={AdminItemDisplay}
@@ -382,6 +391,10 @@ function SearchStack()
               name="myAdsDisplay"
               component={myAdsDisplay}
               options={{title: 'Item Display'}} />
+            <Stack.Screen
+              name="UpdateAd"
+              component={UpdateAd}
+              options={{title: 'Update Ad'}} />
         </Stack.Navigator>
     );
 }
@@ -464,6 +477,10 @@ function AccountStack()
               name="myAdsDisplay"
               component={myAdsDisplay}
               options={{title: 'Item Display'}} />
+            <Stack.Screen
+              name="UpdateAd"
+              component={UpdateAd}
+              options={{title: 'Update Ad'}} />
         </Stack.Navigator>
     );
 }

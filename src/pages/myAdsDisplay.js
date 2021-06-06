@@ -91,7 +91,7 @@ export function myAdsDisplay({route,navigation})
                                     title="Update Ad" 
                                     color={"#fa8072"}
                                     size={25}
-                                    // onPress={DeleteData}
+                                    onPress={() => navigation.navigate('UpdateAd')}
                                     disabled={views}
                                     />
                             </View>

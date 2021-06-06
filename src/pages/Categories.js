@@ -7,6 +7,7 @@ import faker from 'faker';
 import { Dimensions,Image, TouchableOpacity} from 'react-native';
 import {RecyclerListView, DataProvider, LayoutProvider} from 'recyclerlistview';
 import { ScrollView } from 'react-native-gesture-handler';
+import {Avatar} from 'react-native-paper';
 
 export class Categories extends React.Component
 {
@@ -17,80 +18,80 @@ export class Categories extends React.Component
                 <View style={styling.container} >
                     <View style={styling.Vstyle2}>
                         <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false}>
-                            <Pressable onPress={()=> this.props.navigation.navigate('CategoryBooks')}>
+
+                        <Pressable onPress={()=> this.props.navigation.navigate('CategoryBooks')}>
                                 <View style={styling.Vstyle1}>
-                                    <MaterialIcons 
-                                        name="library-books" 
-                                        color="darkred" 
-                                        size={40} 
-                                        style={styling.icn} 
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/books.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>Books</Text>
                                 </View>
-                            </Pressable>
+                        </Pressable>
+
                             <Pressable onPress={()=> this.props.navigation.navigate('CategoryClothes')}>
                                 <View style={styling.Vstyle1}>
-                                    <FontAwesome5 
-                                        name="tshirt" 
-                                        color="darkred" 
-                                        size={40} 
-                                        style={styling.icn} 
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/clothes.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>Clothes</Text>
                                 </View>
                             </Pressable>
+
                             <Pressable onPress={()=> this.props.navigation.navigate('CategoryStationary')}>
                                 <View style={styling.Vstyle1}>
-                                    <FontAwesome5 
-                                        name="toolbox"
-                                        color="darkred"
-                                        size={40}
-                                        style={styling.icn}
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/stationary.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>Stationary</Text>
                                 </View>
                             </Pressable>
+                            
                             <Pressable onPress={()=> this.props.navigation.navigate('CategoryAccessories')}>
                                 <View style={styling.Vstyle1}>
-                                    <MaterialCommunityIcons 
-                                        name="ring"
-                                        color="darkred"
-                                        size={40}
-                                        style={styling.icn}
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/accessories.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>Accessories</Text>
                                 </View>
                             </Pressable>
+                            
                             <Pressable onPress={()=> this.props.navigation.navigate('CategoryShoes')}>
                                 <View style={styling.Vstyle1}>
-                                    <MaterialCommunityIcons 
-                                        name="shoe-heel"
-                                        color="darkred"
-                                        size={40}
-                                        style={styling.icn}
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/shoes.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>Shoes</Text>
                                 </View>
                             </Pressable>
+                            
                             <Pressable onPress={()=> this.props.navigation.navigate('CategoryToys')}>
                                 <View style={styling.Vstyle1}>
-                                    <MaterialCommunityIcons 
-                                        name="baseball-bat"
-                                        color="darkred"
-                                        size={40}
-                                        style={styling.icn}
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/toys.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>Toys</Text>
                                 </View>
                             </Pressable>
+                            
                             <Pressable onPress={()=> this.props.navigation.navigate('CategoryAll')}>
                                 <View style={styling.Vstyle1}>
-                                    <MaterialCommunityIcons 
-                                        name="wallet-travel"
-                                        color="darkred"
-                                        size={40}
-                                        style={styling.icn}
-                                    />
+                                    <Avatar.Image
+                                        source={require('../icons/all.png')}
+                                        size={80}
+                                        backgroundColor={'#fff'} 
+                                        />
                                     <Text style={styling.Txt}>All</Text>
                                 </View>
                             </Pressable>
@@ -120,17 +121,18 @@ const styling= StyleSheet.create({
     },
     mainV:
     {
-        padding:10,
+        padding: 10,
+        // marginLeft: 10,
         backgroundColor:'#fffaf0',
         height:'100%',
     },
     Txt:
     {
         justifyContent: 'center',
-        marginLeft:8,
-        marginRight:8,
-        paddingLeft:8,
-        paddingRight:8,
+        // marginLeft:8,
+        // marginRight:8,
+        // paddingLeft:8,
+        // paddingRight:8,
         alignItems: 'center',
         color: 'darkred',
         fontSize: 20,
@@ -195,6 +197,7 @@ const styling= StyleSheet.create({
     Vstyle1:
     {
         alignItems: 'center',
+        padding: 15,
     },
     Vstyle2:
     {
