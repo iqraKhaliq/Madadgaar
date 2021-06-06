@@ -143,11 +143,9 @@ const Profile = ({route,navigation}) => {
             name= "account-heart-outline" 
             color="red" 
             size={25} 
-            // onPress={()=> this.props.navigation.navigate('favorites')}
             />
           <Text 
             style={styles.menuItemText}
-            // onPress={()=> this.props.navigation.navigate('favorites')}
             >My Favorites</Text>
         </View>
     </TouchableRipple>
@@ -164,11 +162,9 @@ const Profile = ({route,navigation}) => {
             name= "account-star-outline" 
             color="red" 
             size={25} 
-            // onPress={()=> this.props.navigation.navigate('MyRequest')}
             />
           <Text 
             style={styles.menuItemText}
-            // onPress={()=> this.props.navigation.navigate('MyRequest')}
             >My Requests</Text>
         </View>
     </TouchableRipple>
