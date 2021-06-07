@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, ToastAndroid } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, ToastAndroid,Alert } from 'react-native';
 import * as firebase from 'firebase';
 import Logo from '../components/Logo';
 
@@ -36,6 +36,7 @@ export class Signin extends React.Component
           this.props.navigation.navigate('Main');
         })
         .catch((e)=>{
+          ToastAndroid.show(e.message, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
           ToastAndroid.show('Email or Password Incorrect', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         });
       }
@@ -54,6 +55,37 @@ export class Signin extends React.Component
     // })
   }
   
+  forgetPass()
+  {
+    const ref= firebase.auth();
+
+    try
+    {
+      if(this.state.email === "")
+      {
+        ToastAndroid.show('Enter Email Address',ToastAndroid.LONG,ToastAndroid.BOTTOM);
+      }
+      else if(this.state.email !== "")
+      {
+        ref.sendPasswordResetEmail(this.state.email).then(() => {
+          Alert.alert(
+            'Important Note',
+            `Check your Email Address to reset password.\nThank You`,
+            [{
+                text: 'Ok',
+                style: 'cancel'
+            }]
+          )
+        }).catch((e) => {
+          ToastAndroid.show(e.message,ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+        })
+      }
+    }
+    catch(e)
+    {
+      ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+    }
+  }
 
   render() 
   {
@@ -98,7 +130,7 @@ export class Signin extends React.Component
         <View style={styles.signupText}>
             <Text
               style={styles.textS}
-              // onPress={() => this.props.navigation.navigate('Main')}
+              onPress={() => this.forgetPass()}
               >Forgot Password</Text>
             <Text 
               style={styles.textA}

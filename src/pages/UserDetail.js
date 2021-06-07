@@ -70,6 +70,26 @@ export function UserDetail({route,navigation})
                             {/* <Text style={styles.Estyle}>{users.Description}</Text> */}
                         </View>
                     </View>
+
+                    <View style={{margin: 5, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                            <View style={{margin: 5, marginRight: 30}}>
+                                <Button 
+                                    color={"#fa8072"} 
+                                    title="Disable User"
+                                    size={25}  
+                                    // onPress={requestDetails}
+                                    />
+                            </View>
+                            <View style={{margin: 5,marginRight: 30}}>
+                                <Button 
+                                    title="Delete User" 
+                                    color={"#fa8072"}
+                                    size={25}
+                                    // onPress={DeleteData}
+                                    />
+                            </View>
+                            
+                        </View>
                 </View>
 
                 <View style={styles.DataView}>

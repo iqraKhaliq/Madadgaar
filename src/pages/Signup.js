@@ -4,23 +4,6 @@ import { StyleSheet, TouchableOpacity, TextInput, Text, View, Button, ToastAndro
 import Logo from '../components/Logo';
 import * as firebase from "firebase";
 
-const actionCodeSettings ={
-  // URL to redirect back to. The domain (www.example.com)
-  // URL must be in the authorized domains list in the Firebase Console.
-  url: 'https://fir-rn-ca064.firebaseapp.com/__/auth/action?mode=action&oobCode=code',
-  // This must be true.
-  handleCodeInApp: true,
-  iOS: {
-    bundleId: 'com.example.ios',
-  },
-  android: {
-    packageName: 'com.example.android',
-    installApp: true,
-    minimumVersion: '12',
-  },
-  dynamicLinkDomain: 'example.page.link',
-};
-
 export default class SignupForm extends Component 
 {
   state={
@@ -193,12 +176,23 @@ export default class SignupForm extends Component
         reference.createUserWithEmailAndPassword(this.state.email,this.state.password)
         .then((data)=>{
           alert('Account has been created :) Thank You!!');
-          // reference.sendSignInLinkToEmail(this.state.email, actionCodeSettings);
+          
+          const user= reference.currentUser;
+          user.sendEmailVerification();
+          Alert.alert(
+            'Important Note',
+            `Check your Email Address to verify email.\nThank You`,
+            [{
+                text: 'Ok',
+                style: 'cancel'
+            }]
+          )
+
           ToastAndroid.show('Successful', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
           // this.setState({id: data.user.uid});
           const id=data.user.uid;
           this.saveData(id);
-          this.navigation.navigate('Signin');
+          this.props.navigation.navigate('Signin');
         })
         .catch((e)=>{
           ToastAndroid.show(e.toString(), ToastAndroid.SHORT, ToastAndroid.BOTTOM);
