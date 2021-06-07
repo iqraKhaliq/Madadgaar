@@ -17,17 +17,18 @@ export function myAdsDisplay({route,navigation})
     const itemData= async() =>{
         try
         {
-            await firebase.firestore()
-                        .collection('ads')
-                        .doc(id)
-                        .get()
-                        .then(snapShot =>{
-                            if(snapShot.exists)
-                            {
-                                console.log(snapShot.data());
-                                setUsers(snapShot.data());
-                            }
-                        })
+            await firebase
+                    .firestore()
+                    .collection('ads')
+                    .doc(id)
+                    .get()
+                    .then(snapShot =>{
+                        if(snapShot.exists)
+                        {
+                            console.log(snapShot.data());
+                            setUsers(snapShot.data());
+                        }
+                    })
         }
         catch(e)
         {

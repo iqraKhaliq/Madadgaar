@@ -23,24 +23,26 @@ const EditProfile = ({route,navigation}) => {
        try
        {
           firebase
-          .firestore()
-          .collection('userData')
-          .doc(user)
-          .update({
-            FirstName: data.FirstName,
-            LastName: data.LastName,
-            PhoneNumber: data.PhoneNumber,
-            Area: data.Area,
-            City: data.City,
-          })
-          .then(() => {
-            console.log('User Updated!');
-            Alert.alert(
-              'Profile Updated!',
-              'Your profile has been updated successfully.'
-            );
-            navigation.navigate('Account');
-          })
+            .firestore()
+            .collection('userData')
+            .doc(user)
+            .update({
+              FirstName: data.FirstName,
+              LastName: data.LastName,
+              PhoneNumber: data.PhoneNumber,
+              Area: data.Area,
+              City: data.City,
+            })
+            .then(() => {
+              console.log('User Updated!');
+              Alert.alert(
+                'Profile Updated!',
+                'Your profile has been updated successfully.'
+              );
+              // navigation.navigate('Account');
+              navigation.goBack();
+
+            })
       }
        catch(e)
        {
@@ -50,19 +52,27 @@ const EditProfile = ({route,navigation}) => {
     }
    
     const getUser = async() => {
-      await
-       firebase 
-        .firestore()
-        .collection('userData')
-        .doc( user)
-        .get()
-        .then((documentSnapshot) => {
-          if( documentSnapshot.exists ) 
-          {
-            console.log('User Data', documentSnapshot.data());
-            setdata(documentSnapshot.data());
-          }
-        })
+      try
+      {
+        await
+        firebase 
+         .firestore()
+         .collection('userData')
+         .doc( user)
+         .get()
+         .then((documentSnapshot) => {
+           if( documentSnapshot.exists ) 
+           {
+             console.log('User Data', documentSnapshot.data());
+             setdata(documentSnapshot.data());
+           }
+         })
+      }
+      catch(e)
+      {
+        ToastAndroid.show('No dat found',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+      }
+      
     }
 
     useEffect(() => {

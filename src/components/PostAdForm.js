@@ -1,5 +1,5 @@
 import React, { useState,Component, useEffect } from "react";
-import { Button, Image,TextInput, View, Platform,StyleSheet, Picker,Text,ToastAndroid,ScrollView } from "react-native";
+import { Button, Image,TextInput, View, Platform,StyleSheet, Picker,Text,ToastAndroid,ScrollView,Alert } from "react-native";
 import * as firebase from "firebase"; 
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -78,14 +78,14 @@ async componentDidMount()
                 style={styles.buttonStyl} 
                 />
 
-              {!!image1 && Alert.alert(
+              {/* {!!image1 && Alert.alert(
                 'Important Note',
                 `Confirm Images before Posting Ad. You are not allowed to edit/update images later.\nThank You`,
                 [{
                     text: 'Ok',
                     style: 'cancel'
                 }]
-              )}
+              )} */}
               <Text style={styles.txtStyl}>For Additional Images:</Text>
               <ScrollView 
                 horizontal={true} 
@@ -208,6 +208,15 @@ async componentDidMount()
         {
           const name= 'Image1';
           this._handleImage(result1,name);
+
+          Alert.alert(
+            'Important Note',
+            `Confirm Images before Posting Ad. You are not allowed to edit/update images later.\nThank You`,
+            [{
+                text: 'Ok',
+                style: 'cancel'
+            }]
+          )
         }
   };
      
