@@ -71,25 +71,6 @@ export function MenuScreen({navigation})
             
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('Suggestion')}
-              >
-              <Text style={styles.txtStyl}>Suggestion & Feedback</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Contact')}>
-              <Text style={styles.txtStyl}>Contact Us</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('Help')}>
-              <Text style={styles.txtStyl}>Help</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
               onPress={() => navigation.navigate('MyRequest')}
               >
               <Text style={styles.txtStyl}>My Requests</Text>
@@ -107,6 +88,25 @@ export function MenuScreen({navigation})
               onPress={() => navigation.navigate('Favorites')}
               >
               <Text style={styles.txtStyl}>My Favorites</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Suggestion')}
+              >
+              <Text style={styles.txtStyl}>Suggestion & Feedback</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Contact')}>
+              <Text style={styles.txtStyl}>Contact Us</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => navigation.navigate('Help')}>
+              <Text style={styles.txtStyl}>Help</Text>
             </TouchableOpacity>
 
             <TouchableOpacity

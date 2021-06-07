@@ -77,8 +77,15 @@ async componentDidMount()
                 onPress={this.pickImg} 
                 style={styles.buttonStyl} 
                 />
-      
-      
+
+              {!!image1 && Alert.alert(
+                'Important Note',
+                `Confirm Images before Posting Ad. You are not allowed to edit/update images later.\nThank You`,
+                [{
+                    text: 'Ok',
+                    style: 'cancel'
+                }]
+              )}
               <Text style={styles.txtStyl}>For Additional Images:</Text>
               <ScrollView 
                 horizontal={true} 
@@ -124,7 +131,6 @@ async componentDidMount()
                   <Picker 
                     mode="dropdown"
                     selectedValue={this.state.list}
-                    style={{height:40, width: 340}}
                     backgroundColor={'#e9967a'}
                     style={styles.dropStyle}
                     onValueChange={(itmVal) => {this.updateList(itmVal);}}
@@ -432,7 +438,7 @@ const styles= StyleSheet.create({
         marginBottom:5,
         height:40,
         backgroundColor:'#e9967a',
-        opacity:0.8,
+        opacity:1,
         borderRadius:10,
         paddingHorizontal:10,
         paddingTop:10,
@@ -444,17 +450,14 @@ const styles= StyleSheet.create({
         alignItems: 'baseline',
         justifyContent: 'center',
         paddingTop:10, 
-        paddingVertical: 5,
-        alignItems: 'flex-start',
-        backgroundColor: '#fffaf0',
+        padding: 5,
+        backgroundColor: '#ffe4e1',
         height: '100%',
     },
     viewer2:
     { 
       flex:1,
       alignItems: 'stretch',
-      // padding:8,
-      // margin: 8,
     },
     ImgSytl:
     {
@@ -465,10 +468,6 @@ const styles= StyleSheet.create({
     },
     buttonStyl:
     {
-        // paddingTop:10,
-        // marginTop: 10,
-        // marginBottom: 15,
-        // borderRadius:15,
         flex:2,
     },
     icn:
@@ -488,5 +487,5 @@ const styles= StyleSheet.create({
       fontSize: 20,
       paddingTop:5,
       marginTop:5,
-    }
+    },
 });
