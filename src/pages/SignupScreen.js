@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView } from 'react-native';
-import { ScrollView, StyleSheet} from 'react-native';
-
+import { View, Text, TextInput, TouchableOpacity, SafeAreaView,ScrollView, StyleSheet } from 'react-native';
 import Logo from '../components/Logo';
 import Form from '../components/SignupForm';
 

@@ -78,7 +78,7 @@ async componentDidMount()
                 />
       
       
-              <Text style={styles.txtStyl}>For Additional Images:</Text>
+              {/* <Text style={styles.txtStyl}>For Additional Images:</Text>
               <ScrollView 
                 horizontal={true} 
                 style={styles.scrllvw} 
@@ -181,7 +181,7 @@ async componentDidMount()
                     style={styles.buttonStyl} 
                     onPress={this.addData} 
                     />
-              </ScrollView>
+              </ScrollView> */}
             </View>
           </ScrollView>    
       </View>

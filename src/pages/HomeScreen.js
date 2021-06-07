@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  View,
-  Text,
-  SafeAreaView
-} from 'react-native';
+import {TouchableOpacity,StyleSheet,View,Text,SafeAreaView} from 'react-native';
 import Logo from '../components/Logo';
 
 const HomeScreen = ({ route, navigation }) => {

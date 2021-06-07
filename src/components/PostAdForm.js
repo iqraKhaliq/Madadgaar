@@ -1,9 +1,8 @@
 import React, { useState,Component, useEffect } from "react";
-import { Button, Image,TextInput, View, Platform,StyleSheet, Picker,Text, ToastAndroid } from "react-native";
+import { Button, Image,TextInput, View, Platform,StyleSheet, Picker,Text,ToastAndroid,ScrollView } from "react-native";
 import * as firebase from "firebase"; 
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
-import { ScrollView } from 'react-native-gesture-handler';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as permissions from 'expo-permissions';
 

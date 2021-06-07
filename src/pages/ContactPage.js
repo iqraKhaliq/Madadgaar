@@ -1,7 +1,5 @@
-import React from 'react';
-import {Component} from 'react';
-import {View,Text,StyleSheet, Button} from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import React ,{Component}from 'react';
+import {View,Text,StyleSheet, Button,TextInput} from 'react-native';
 import {Feather} from "@expo/vector-icons";
 
 export default class ContactPage extends React.Component
@@ -21,7 +19,6 @@ export default class ContactPage extends React.Component
                 <Text style={styl.Tstyl}><Feather name='home' size={20} color='darkred' /> Address</Text>
                 <Text style={styl.Tstyl2}>COMSATS University Islambad, Lahore Campus.</Text>
             </View>
-            
         );
     }
 }

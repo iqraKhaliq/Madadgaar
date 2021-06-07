@@ -1,9 +1,6 @@
-import React from 'react';
-import {Component} from 'react';
-import {View,Text,StyleSheet, Pressable} from 'react-native';
-import {AntDesign,Octicons} from '@expo/vector-icons';
-import {Ionicons} from "@expo/vector-icons";
-import {ScrollView} from 'react-native-gesture-handler';
+import React,{Component} from 'react';
+import {View,Text,StyleSheet, Pressable,ScrollView} from 'react-native';
+import {AntDesign,Octicons,Ionicons} from '@expo/vector-icons';
 
 export default class helpPage extends React.Component
 {

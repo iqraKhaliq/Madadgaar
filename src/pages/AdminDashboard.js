@@ -7,18 +7,6 @@ export default class AdminDashboard extends React.Component
     {
         return(
             <View style={styles.container}>
-                {/* <Button 
-                    color={"#fa8072"} 
-                    title="Donated Items"
-                    size={45}  
-                    onPress={() => this.props.navigation.navigate('DonorDetails')}
-                    />
-                <Button 
-                    color={"#fa8072"} 
-                    title="Users Feedback"
-                    size={45}  
-                    onPress={() => this.props.navigation.navigate('FeedbackList')}
-                    /> */}
                     <TouchableOpacity
                         style={styles.button}
                         onPress={() => this.props.navigation.navigate('DonorDetails')}
@@ -39,7 +27,6 @@ export default class AdminDashboard extends React.Component
                         >
                         <Text style={styles.txtStyl}>Users List</Text>
                     </TouchableOpacity>
-                  
             </View>
         )
     }

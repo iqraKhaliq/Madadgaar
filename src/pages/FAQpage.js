@@ -1,5 +1,4 @@
-import React from 'react';
-import {Component} from 'react';
+import React,{Component} from 'react';
 import {View,Text,StyleSheet} from 'react-native';
 
 export default class FAQ extends React.Component
