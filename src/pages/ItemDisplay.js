@@ -56,6 +56,7 @@ export default function ItemDisplay({route,navigation})
                             style={{width: 260}}
                             >
                                 <Image source={{uri: users.Image1}} style={styles.Simage}/>
+                                
                                 {!!users.Image2 && <Image source={{uri: users.Image2}} style={styles.Simage}/>}
                                 {!!users.Image3 &&<Image source={{uri: users.Image3}} style={styles.Simage}/>}
                                 {!!users.Image4 && <Image source={{uri: users.Image4}} style={styles.Simage}/>}
@@ -258,8 +259,8 @@ const styles= StyleSheet.create({
     VInstyle:
     {
       flexDirection: 'column',
-      padding: 5,
-      margin: 5,
+    //   padding: 5,
+    //   margin: 5,
     },
     VD:
     {
@@ -267,7 +268,7 @@ const styles= StyleSheet.create({
         flexDirection: 'column',
         padding: 5,
         margin: 5,
-        width: '90%',
+        width: '80%',
     },
     Estyle:
     {
