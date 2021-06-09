@@ -17,6 +17,7 @@ const EditProfile = ({route,navigation}) => {
     const [data, setdata] = useState(null);
     const user= firebase.auth().currentUser.uid; 
     const [image,setImage]= useState(null);
+    const [show, setShow] =useState(false);
 
     const handleUpdate = async() => {
        try
@@ -65,6 +66,7 @@ const EditProfile = ({route,navigation}) => {
            {
              console.log('User Data', documentSnapshot.data());
              setdata(documentSnapshot.data());
+             setShow(true);
            }
          })
       }
@@ -115,22 +117,32 @@ const EditProfile = ({route,navigation}) => {
     <View style={styles.container}>
       <View style={{margin:20}}>
         <View style={{alignItems:'center'}}>
-            <View >
+        <Text 
+            style={{margin:20, fontSize:25,fontWeight:'bold', color: 'maroon'}}
+            >{data ? data.FirstName : ''} {data ? data.LastName : ''}</Text>
+
+            <View style={{marginBottom: 20}}>
                 <Pressable 
                     onPress={pickImg} 
                     > 
-                    <View>
+                    {image ==null && <View>
                         <Image
-                          source={{uri: data ? data.ProfileImage : '../profiles/teenager.png'}}
+                          source={{uri: data ? data.ProfileImage: '../profiles/teenager.png'}}
                           style={{borderRadius:1000, width: 150,height: 150}}
                           />    
-                    </View>
+                    </View>}
+                    
+                    {image != null && <View>
+                        <Image
+                          source={{uri: image ? image: '../profiles/teenager.png'}}
+                          style={{borderRadius:1000, width: 150,height: 150}}
+                          />    
+                    </View>}
                 </Pressable>
             </View>
           
-          <Text 
-            style={{marginTop:10, fontSize:18,fontWeight:'bold'}}
-            > {data ? data.FirstName : ''} {data ? data.LastName : ''}</Text>
+          <Text style={{fontSize: 15, color: 'red'}}>Tap Image to change Profile Picture</Text>
+          
             
         </View>
 

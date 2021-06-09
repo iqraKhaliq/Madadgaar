@@ -74,7 +74,7 @@ const Profile = ({route,navigation}) => {
         <Image 
           source={{uri: data.ProfileImage}}
           style={{borderRadius: 1000, height: 80, width: 80}}
-          />
+        />
        
         <View style={{marginLeft: 20}}>
           <Title style={styles.title} >{data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Title>
