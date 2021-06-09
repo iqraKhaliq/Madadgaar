@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { ScrollView, StyleSheet, Pressable, View, SafeAreaView,TouchableOpacity,Button, ToastAndroid } from 'react-native';
+import { ScrollView, StyleSheet, Pressable, View, SafeAreaView,TouchableOpacity,Button, ToastAndroid, Image} from 'react-native';
 import {Avatar,Title, Caption,TouchableRipple,Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as firebase from "firebase";
@@ -7,7 +7,7 @@ import * as firebase from "firebase";
 
 const Profile = ({route,navigation}) => { 
 {
-    const [data, setdata] = useState(null);
+    const [data, setdata] = useState([]);
     const [loading, setLoading] = useState(true);
     const [B,setB] =useState(false);
     const [countD,setCountD]= useState(0);
@@ -22,7 +22,7 @@ const Profile = ({route,navigation}) => {
         firebase 
           .firestore()
           .collection('userData')
-          .doc( user)
+          .doc(user)
           .get()
           .then((documentSnapshot) => {
             if( documentSnapshot.exists ) 
@@ -71,11 +71,10 @@ const Profile = ({route,navigation}) => {
    <SafeAreaView style={styles.container}>
     <View style={styles.userInfoSection}>
       <View style={{flexDirection: 'row', marginTop: 15 }}>
-        <Avatar.Image 
-            source={require('../images/profile.png')}
-            size={80}
-            backgroundColor={'#a9a9a9'}
-        />
+        <Image 
+          source={{uri: data.ProfileImage}}
+          style={{borderRadius: 1000, height: 80, width: 80}}
+          />
        
         <View style={{marginLeft: 20}}>
           <Title style={styles.title} >{data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Title>

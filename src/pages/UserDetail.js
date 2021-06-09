@@ -1,8 +1,7 @@
 import React,{Component,useEffect,useState} from 'react';
 import {View, Text, Button,Image, StyleSheet, ToastAndroid, TouchableOpacity, Alert, ScrollView} from 'react-native';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-import {Avatar} from 'react-native-paper';
-import * as firebase from "firebase";
+import * as firebase from 'firebase';
 
 export function UserDetail({route,navigation})
 {
@@ -12,7 +11,6 @@ export function UserDetail({route,navigation})
     const uid= firebase.auth().currentUser.uid;
 
     const [views,setViews]= useState(false);
-    // const [color,setColor]= useState(false);
     const [users,setUsers]= useState([]);
 
     const itemData= async() =>{
@@ -46,62 +44,51 @@ export function UserDetail({route,navigation})
             <View style={styles.containerInner}>
                 <View style={styles.Vstyle}>
                     <View style={styles.VInstyle}>
-                        <Avatar.Image 
-                            source={require('../images/profile.png')}
-                            size={100}
-                            backgroundColor={'#a9a9a9'}
-                        />
-                        {/* <ScrollView 
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                            style={{width: 300}}
-                            >
-                                <Image source={{uri: users.Image1}} style={styles.Simage}/>
-                                {!!users.Image2 && <Image source={{uri: users.Image2}} style={styles.Simage}/>}
-                                {!!users.Image3 &&<Image source={{uri: users.Image3}} style={styles.Simage}/>}
-                                {!!users.Image4 && <Image source={{uri: users.Image4}} style={styles.Simage}/>}
-                                 
-                        </ScrollView>
-
-                        {!!users.Image2 && <Text style={styles.note}>Note: Swipe to see the Picture</Text>} */}
-
+                        <Image 
+                            source={{uri: users.ProfileImage}} 
+                            style={{width: 200,height:200,borderRadius: 1000}}
+                            />
+                        
                         <View style={styles.VInstyle}>
                             <Text style={styles.Fstyle}>{users.FirstName} {users.LastName}</Text>
-                            {/* <Text style={styles.Estyle}>{users.Description}</Text> */}
                         </View>
                     </View>
 
-                    <View style={{margin: 5, flexDirection: 'row', justifyContent: 'space-evenly'}}>
-                            <View style={{margin: 5, marginRight: 30}}>
-                                <Button 
-                                    color={"#fa8072"} 
-                                    title="Disable User"
-                                    size={25}  
-                                    // onPress={requestDetails}
-                                    />
-                            </View>
-                            <View style={{margin: 5,marginRight: 30}}>
-                                <Button 
-                                    title="Delete User" 
-                                    color={"#fa8072"}
-                                    size={25}
-                                    // onPress={DeleteData}
-                                    />
-                            </View>
-                            
-                        </View>
+                    
                 </View>
 
                 <View style={styles.DataView}>
-                    <Button 
-                        color={"#fa8072"} 
-                        title="View Details"
-                        size={25}  
-                        onPress={requestDetails}
-                        disabled={views}
-                        />
-
+                    <View style={{margin: 5, flexDirection: 'row', justifyContent: 'space-evenly'}}>
+                        <View style={{margin: 5, marginRight: 30}}>
+                            <Button 
+                                color={"#fa8072"} 
+                                title="View Details"
+                                size={25}  
+                                onPress={requestDetails}
+                                disabled={views}
+                                />
+                        </View>
                     
+                        {/* <View style={{margin: 5, marginRight: 30}}>
+                            <Button 
+                                color={"#fa8072"} 
+                                title="Disable User"
+                                size={25}  
+                                // onPress={requestDetails}
+                                />
+                        </View> */}
+                            
+                        <View style={{margin: 5,marginRight: 30}}>
+                            <Button 
+                                title="Delete User" 
+                                color={"#fa8072"}
+                                size={25}
+                                onPress={DeleteData}
+                                />
+                        </View>
+                            
+                    </View>
+
                     {views && 
                         <View style={styles.VD}>
                             {!!users.uid && <Text style={styles.Dstyle}>User Id: {users.uid}</Text>}
@@ -120,17 +107,6 @@ export function UserDetail({route,navigation})
                                 size={25}
                                 onPress={removeDetails}
                                 disabled={!views}
-                                
-                                />
-                        </View>}
-
-                        {views && <View style={{margin: 5}}>
-                            <Button 
-                                title="Disable User" 
-                                color={"#fa8072"}
-                                size={25}
-                                onPress={DeleteData}
-                                disabled={!views}
                                 />
                         </View>}
                     </View>
@@ -143,12 +119,15 @@ export function UserDetail({route,navigation})
     async function DeleteData()
     {
         const reference=firebase.firestore().collection("userData");
-        
         try
         {
-            // await reference.doc(id).delete();
-            
-            ToastAndroid.show('User Disabled', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            await reference.doc(id).delete();
+            // admin.auth().deleteUser(id).then(() => {
+            //     alert(id);
+            // }).catch((e) => {
+            //     alert(e.toString());
+            // })
+            ToastAndroid.show('User Deleted from Database', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }
         catch(e)
         {
@@ -174,7 +153,7 @@ export function UserDetail({route,navigation})
         }
         catch(e)
         {
-            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+            ToastAndroid.show(e.toString(), ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
     }
 
@@ -185,17 +164,13 @@ export function UserDetail({route,navigation})
         {
             ToastAndroid.show('Removing Details', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
             setViews(false);
-            this.props.navigation.navigate('DonorDetails');
         }
         catch(e)
         {
-            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+            ToastAndroid.show(e.toString(), ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
     }
 }
-
-
-
 
 const styles= StyleSheet.create({
     container:
@@ -205,26 +180,37 @@ const styles= StyleSheet.create({
       flexDirection: 'column',
       marginBottom: 10,
       height: '100%',
+      justifyContent: 'center',
+      alignContent: 'center',
+      alignItems: 'center',
     },
     containerInner:
     {
         backgroundColor: 'lightpink',
         padding: 10,
         flexDirection: 'column',
-        margin: 5,   
+        margin: 5,
+        justifyContent: 'center',
+        alignContent: 'center',
+        alignItems: 'center',   
     },
     Vstyle:
     {
       padding: 5,
       margin: 5,
-      flexDirection: 'row',
-      justifyContent: 'space-between',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignContent: 'center',
+      alignItems: 'center',
     },
     VInstyle:
     {
       flexDirection: 'column',
       padding: 5,
       margin: 5,
+      justifyContent: 'center',
+      alignContent: 'center',
+      alignItems: 'center',
     },
     VD:
     {

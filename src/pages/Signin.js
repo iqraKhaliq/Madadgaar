@@ -37,7 +37,7 @@ export class Signin extends React.Component
         })
         .catch((e)=>{
           ToastAndroid.show(e.message, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
-          ToastAndroid.show('Email or Password Incorrect', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+          // ToastAndroid.show('Email or Password Incorrect', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         });
       }
     }

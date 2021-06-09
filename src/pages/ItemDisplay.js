@@ -36,7 +36,7 @@ export default function ItemDisplay({route,navigation})
         }
         catch(e)
         {
-            ToastAndroid.show('Nothing to Display',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }             
     }
 
@@ -130,7 +130,7 @@ export default function ItemDisplay({route,navigation})
                 }
                 catch(e)
                 {
-                    ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+                    ToastAndroid.show(e.toString(), ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
             }
             else if(color === false)
@@ -157,7 +157,7 @@ export default function ItemDisplay({route,navigation})
                 }
                 catch(e)
                 {
-                    ToastAndroid.show('Network failed :(',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+                    ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
             }
         }
@@ -200,7 +200,7 @@ export default function ItemDisplay({route,navigation})
         }
         catch(e)
         {
-            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+            ToastAndroid.show(e.toString(), ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
     }
 
@@ -217,7 +217,7 @@ export default function ItemDisplay({route,navigation})
         }
         catch(e)
         {
-            ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+            ToastAndroid.show(e.toString(), ToastAndroid.SHORT, ToastAndroid.BOTTOM);
         }
     }
 }

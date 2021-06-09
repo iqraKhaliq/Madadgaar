@@ -18,11 +18,12 @@ export class Users extends Component
                               .onSnapshot(docs => {
                                 let users=[];
                                 docs.forEach(doc => {
-                                  const {FirstName, LastName}=doc.data();
+                                  const {FirstName, LastName ,ProfileImage}=doc.data();
                                   users.push({
                                     id: doc.id, 
                                     FirstName, 
                                     LastName,
+                                    ProfileImage,
                                   });
                                 });
                                 this.setState({users});
@@ -49,15 +50,13 @@ export class Users extends Component
           renderItem={({item}) => (
             <TouchableOpacity onPress={() => this.props.navigation.navigate('UserDetail',{id: item.id})}>
               <View style={styles.Vstyle}>
-                {/* <Image source={{uri: item.Image1}} style={{width: 100,height:100}}/> */}
-                <Avatar.Image 
-                    source={require('../images/profile.png')}
-                    size={50}
-                    backgroundColor={'#a9a9a9'}
-                    />
+                <Image 
+                  source={{uri: item.ProfileImage}} 
+                  style={{width: 50,height:50,borderRadius: 1000}}
+                  />
+          
                 <View style={styles.VInstyle}>
                   <Text style={styles.Fstyle}>{item.FirstName} {item.LastName}</Text>
-                  {/* <Text style={styles.Estyle}>{item.LastName}</Text> */}
                 </View>
               </View>
             </TouchableOpacity>

@@ -1,15 +1,15 @@
 import React,{Component,useEffect,useState} from 'react';
-import {TouchableOpacity,StyleSheet,View,Text,SafeAreaView,ScrollView, ImageBackground, ToastAndroid} from 'react-native';
-import Logo from '../components/Logo';
+import {TouchableOpacity, StyleSheet, View, Text, SafeAreaView, ScrollView, Image, ToastAndroid} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import * as firebase from "firebase";
 
 export function MenuScreen({navigation})
 {
   const [data,setData]= useState(null);
   const [loading, setLoading] = useState(true);
+  const uid= firebase.auth().currentUser.uid;
 
   const getUser= async()=>{
-    const uid= firebase.auth().currentUser.uid;
     try
       {
         await
@@ -46,13 +46,24 @@ export function MenuScreen({navigation})
             >
           <View
             style={{
-              flex: 1,
+              // flex: 1,
               alignItems: 'center',
               justifyContent: 'center',
             }}>
             
           <View style={styles.Vstyle} >
-            <Text style={styles.VTstyle}>Welcome {data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Text>
+            <View>
+              <Image
+                source={{uri: data? data.ProfileImage || '../profiles/teenager.png': '../profiles/teenager.png'}}
+                style={{height: 150,width: 150,borderRadius: 1000}}
+                />
+            </View>
+
+            <View style={styles.head}>
+              <Text 
+                style={styles.VTstyle}
+                >Welcome {data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Text>
+              </View>
           </View>
 
           {/* <TouchableOpacity
@@ -73,6 +84,7 @@ export function MenuScreen({navigation})
               style={styles.button}
               onPress={() => navigation.navigate('MyRequest')}
               >
+              {/* <Icon name="account-edit" color="white" size={20}/> */}
               <Text style={styles.txtStyl}>My Requests</Text>
             </TouchableOpacity>
 
@@ -154,6 +166,7 @@ const styles = StyleSheet.create
     margin: 2,
     marginLeft: 5,
     borderRadius:10,
+    marginTop: 5,
   },
   txtStyl:
   {
@@ -161,31 +174,38 @@ const styles = StyleSheet.create
     fontWeight:'bold',
     fontSize: 25,
   },
+  head:
+  {
+    marginTop: 5,
+    paddingTop: 5,
+    justifyContent: 'flex-end',
+    alignContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+  },
   Vstyle:
   {
-    height: 170,
-    // alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    backgroundColor: 'maroon',
-    flex:1,
+    height: 250,
+    justifyContent: 'center',
+    backgroundColor: '#fa8070',
     minWidth:280,
+    alignItems: 'center',
+    alignContent: 'center',
+    flexDirection: 'column',
   },
   VTstyle:
   {
-    alignItems:'baseline',
-    justifyContent: 'space-around',
-    fontSize: 25,
+    fontSize: 30,
     color: 'white',
-    padding:5,
-    paddingLeft:10,
+    fontStyle: 'normal',
+    fontWeight: '700',
   },
   Vsignout:
   {
-    // height: 150,
-    marginTop:'130%',
+    marginTop:'98%',
     padding:5,
     justifyContent: 'flex-end',
-    backgroundColor: 'maroon',
+    backgroundColor: '#fa8070',
     flex:1,
     minWidth:280,
     borderColor: 'white',
@@ -194,7 +214,7 @@ const styles = StyleSheet.create
   signout:
   {
     // alignItems: 'flex-end',
-    backgroundColor: 'maroon',
+    backgroundColor: '#fa8070',
     paddingLeft: 20,
     width: 300,
     marginTop: '5%',

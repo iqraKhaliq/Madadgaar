@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
-import { StyleSheet, TouchableOpacity, TextInput, Text, View, Button, ToastAndroid, ScrollView} from 'react-native';
+import { StyleSheet, TouchableOpacity, TextInput, Text, View, Button, ToastAndroid, ScrollView, Alert} from 'react-native';
 import Logo from '../components/Logo';
 import * as firebase from "firebase";
 
@@ -16,6 +16,7 @@ export default class SignupForm extends Component
     email: "",
     password: "",
     confirmPass: "",
+    profileImage:"https://firebasestorage.googleapis.com/v0/b/fir-rn-ca064.appspot.com/o/ProfileImages%2Fteenager.png?alt=media&token=1220078d-47e9-4841-9239-7898a6f092d9",
   };
 
   render() 
@@ -219,6 +220,7 @@ export default class SignupForm extends Component
         Address: this.state.address,
         PhoneNumber: this.state.phone,
         Email: this.state.email,
+        ProfileImage: this.state.profileImage,
       });
 
       this.setState({fname: ""});

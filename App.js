@@ -6,17 +6,17 @@ if(!firebase.apps.length)
 {
   firebase.initializeApp(firebaseConfig) ;
 }
-
-
 //icons for tab navigator
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {MaterialCommunityIcons,FontAwesome} from '@expo/vector-icons';
+
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import FontAwesome from 'react-native-vectors-icons/';
 
 // imports for navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator} from "@react-navigation/drawer";
 
 // importing screens
 import HomeScreen from './src/pages/HomeScreen';
@@ -588,17 +588,18 @@ const StackMain= createStackNavigator();
 function App()
 {
   return(
-    <NavigationContainer>
-      <StackMain.Navigator initialRouteName="Home">
-        <StackMain.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
-        <StackMain.Screen name="Signin" component={SigninScreen} options={{headerShown: false}} />
-        <StackMain.Screen name="Signup" component={SignupScreen} options={{headerShown: false}} />
-        <StackMain.Screen name="Main" component={MenuDrawer} options={{headerShown: false}} />
-        <StackMain.Screen name="AdminStack" component={AdminStack} options={{headerShown: false}}/>
-      </StackMain.Navigator>
-    </NavigationContainer>
-  )
+      <NavigationContainer>
+        <StackMain.Navigator initialRouteName="Home">
+          <StackMain.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
+          <StackMain.Screen name="Signin" component={SigninScreen} options={{headerShown: false}} />
+          <StackMain.Screen name="Signup" component={SignupScreen} options={{headerShown: false}} />
+          <StackMain.Screen name="Main" component={MenuDrawer} options={{headerShown: false}} />
+          <StackMain.Screen name="AdminStack" component={AdminStack} options={{headerShown: false}}/>
+         </StackMain.Navigator>
+      </NavigationContainer>
+    )
 }
+
 export default App;
 
 {/* <Stack.Screen
