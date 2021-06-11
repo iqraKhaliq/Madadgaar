@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, TextInput, TouchableOpacity, ToastAndroid,Alert } from 'react-native';
 import * as firebase from 'firebase';
 import Logo from '../components/Logo';
+// import {AuthContext} from '../utils/utils';
 
 export class Signin extends React.Component 
 {
@@ -10,6 +11,8 @@ export class Signin extends React.Component
     email:"",
     password:"",
   }
+
+  // const {signIn}= React.useContext(AuthContext);
 
   saveitem()
   {
@@ -34,6 +37,7 @@ export class Signin extends React.Component
           this.setState({email:""});
           this.setState({password:""});
           this.props.navigation.navigate('Main');
+          // ()=> signIn({this.state.email, this.state.password});
         })
         .catch((e)=>{
           ToastAndroid.show(e.message, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
