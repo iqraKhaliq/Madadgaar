@@ -12,7 +12,7 @@ export class Categories extends Component
         loading: false,
     }
 
-        componentDidMount ()
+        componentDidMount()
         {
             try
             {
