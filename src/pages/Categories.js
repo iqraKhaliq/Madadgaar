@@ -12,34 +12,33 @@ export class Categories extends Component
         loading: false,
     }
 
-    // componentDidMount ()
-    // {
-    //         try
-    //         {
-    //             firebase
-    //             .firestore()
-    //             .collection('ads')
-    //             // .where("ProductName", "==", this.state.searchData)
-    //             .whereGreaterThanOrEqualTo("ProductName",this.state.searchData)
-    //             .get()
-    //             .then((docs) => {
-    //                 let data= [];
-    //                 const {Image1,ProductName,Description}=doc.data();
-    //                 data.push({
-    //                     id: docs.id,
-    //                     Image1,
-    //                     ProductName,
-    //                     Description,
-    //                 });
-    //             })
-    //             this.setState({data});
-    //             // console.log(data);
-    //         }
-    //         catch(e)
-    //         {
-    //             // ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-    //         }
-    //     }
+        componentDidMount ()
+        {
+            try
+            {
+                firebase
+                .firestore()
+                .collection('ads')
+                .where("ProductName", "==", this.state.searchData)
+                .get()
+                .then((docs) => {
+                    let data= [];
+                    const {Image1,ProductName,Description}=doc.data();
+                    data.push({
+                        id: docs.id,
+                        Image1,
+                        ProductName,
+                        Description,
+                    });
+                })
+                this.setState({data});
+                // console.log(data);
+            }
+            catch(e)
+            {
+                // ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+            }
+        }
 
         componentDidUpdate()
         {
@@ -91,7 +90,7 @@ export class Categories extends Component
                         value={this.state.searchData}
                         onChangeText={word => this.setState({searchData: word})}
                         />
-                        <Text>{this.state.searchData}</Text>
+                        {/* <Text>{this.state.searchData}</Text> */}
                     </View>
                         <View style={styling.Vstyle2}>
                             <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false}>
@@ -176,8 +175,8 @@ export class Categories extends Component
                         </View>
     
                         <View>
-                        {/* {!!this.state.loading && <ActivityIndicator size="large" color="#800000"/>} */}
-                        {this.state.loading && <Text>nothing to display</Text>}
+                        {/* {this.state.loading && <ActivityIndicator size="large" color="#800000"/>} */}
+                        {!this.state.loading && <View style={styling.loader}><Text style={styling.Txt}>Nothing to Display :(</Text></View>}
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <FlatList
                                     style={styling.container}
@@ -275,6 +274,13 @@ const styling= StyleSheet.create({
         // padding: 10,
         margin:5,
     },
+    loader:
+    {
+        alignItems: 'center',
+        justifyContent: 'center',
+        alignContent: 'center',
+        height: '80%',
+    }
 });
 
 export default Categories;

@@ -1,6 +1,7 @@
 import React,{Component,useEffect,useState} from 'react';
 import {TouchableOpacity, StyleSheet, View, Text, SafeAreaView, ScrollView, Image, ToastAndroid} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Avatar} from 'react-native-paper';
 import * as firebase from "firebase";
 
 export function MenuScreen({navigation})
@@ -66,74 +67,109 @@ export function MenuScreen({navigation})
               </View>
           </View>
 
-          {/* <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('details')}
-              >
-              <Text style={styles.txtStyl}>Details</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('test')}
-              >
-              <Text style={styles.txtStyl}>test</Text>
-            </TouchableOpacity> */}
-            
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('MyRequest')}
               >
-              {/* <Icon name="account-edit" color="white" size={20}/> */}
-              <Text style={styles.txtStyl}>My Requests</Text>
+              <View style={styles.inner}>
+                <Avatar.Image
+                  source={require('../icons/request.png')}
+                  size={40}
+                  backgroundColor={'#fff'} 
+                  />
+                <Text style={styles.txtStyl}>My Requests</Text>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('MyAds')}
               >
-              <Text style={styles.txtStyl}>My Ads</Text>
+              <View style={styles.inner}>
+                <Avatar.Image
+                  source={require('../icons/ads.png')}
+                  size={40}
+                  backgroundColor={'#fff'} 
+                  />
+                <Text style={styles.txtStyl}>My Ads</Text>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('Favorites')}
               >
-              <Text style={styles.txtStyl}>My Favorites</Text>
+              <View style={styles.inner}>
+                <Avatar.Image
+                  source={require('../icons/fav.png')}
+                  size={40}
+                  backgroundColor={'#fff'} 
+                  />
+                <Text style={styles.txtStyl}>My Favorites</Text>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('Suggestion')}
               >
-              <Text style={styles.txtStyl}>Suggestion & Feedback</Text>
+              <View style={styles.inner}>
+                <Avatar.Image
+                  source={require('../icons/suggestion.png')}
+                  size={40}
+                  backgroundColor={'#fff'} 
+                  />
+                <Text style={styles.txtStyl}>Feedback</Text>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('Contact')}>
-              <Text style={styles.txtStyl}>Contact Us</Text>
+              onPress={() => navigation.navigate('Contact')}
+              >
+              <View style={styles.inner}>
+                <Avatar.Image
+                  source={require('../icons/contact.png')}
+                  size={40}
+                  backgroundColor={'#fff'} 
+                  />
+                <Text style={styles.txtStyl}>Contact Us</Text>
+              </View>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => navigation.navigate('Help')}>
-              <Text style={styles.txtStyl}>Help</Text>
+              onPress={() => navigation.navigate('Help')}
+              >
+              <View style={styles.inner}>
+                <Avatar.Image
+                  source={require('../icons/help.png')}
+                  size={40}
+                  backgroundColor={'#fff'} 
+                  />
+                <Text style={styles.txtStyl}>Help</Text>
+              </View>
             </TouchableOpacity>
 
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.button}
               onPress={() => navigation.navigate('FAQ')}
               >
               <Text style={styles.txtStyl}>FAQ's</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <View style={styles.Vsignout}>
               <TouchableOpacity
                 style={styles.signout}
                 onPress={signout}
                 >
-                <Text style={styles.txtSignout}>Sign Out</Text>
+                <View style={styles.inner}>
+                  <Text style={styles.txtSignout}>Sign Out</Text>
+                  <Avatar.Image
+                    source={require('../icons/logout.png')}
+                    size={40}
+                    />
+                </View>
               </TouchableOpacity>
             </View>
             </View>
@@ -173,10 +209,12 @@ const styles = StyleSheet.create
     color:'darkred',
     fontWeight:'bold',
     fontSize: 25,
+    marginLeft: 10,
   },
   head:
   {
     marginTop: 5,
+    marginLeft: 8,
     paddingTop: 5,
     justifyContent: 'flex-end',
     alignContent: 'center',
@@ -188,7 +226,7 @@ const styles = StyleSheet.create
     height: 250,
     justifyContent: 'center',
     backgroundColor: '#fa8070',
-    minWidth:280,
+    minWidth: 280,
     alignItems: 'center',
     alignContent: 'center',
     flexDirection: 'column',
@@ -202,7 +240,7 @@ const styles = StyleSheet.create
   },
   Vsignout:
   {
-    marginTop:'98%',
+    marginTop:'80%',
     padding:5,
     justifyContent: 'flex-end',
     backgroundColor: '#fa8070',
@@ -220,7 +258,7 @@ const styles = StyleSheet.create
     marginTop: '5%',
     marginBottom: '5%',
     marginLeft: 25,
-    borderRadius:10,
+    borderRadius: 10,
     justifyContent: 'flex-end',
     flexDirection: 'column-reverse',
   },
@@ -229,6 +267,12 @@ const styles = StyleSheet.create
     color:'white',
     fontWeight:'bold',
     fontSize: 25,
+    marginRight: '45%',
+  },
+  inner:
+  {
+    flexDirection:'row',
+    alignItems: 'center',
   }
 });
 

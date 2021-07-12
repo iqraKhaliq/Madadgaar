@@ -22,6 +22,8 @@ const EditProfile = ({route,navigation}) => {
     const handleUpdate = async() => {
        try
        {
+         if(image !== null)
+         {
           firebase
             .firestore()
             .collection('userData')
@@ -40,10 +42,31 @@ const EditProfile = ({route,navigation}) => {
                 'Profile Updated!',
                 'Your profile has been updated successfully.'
               );
-              // navigation.navigate('Account');
               navigation.goBack();
-
             })
+          }
+          else
+          {
+            firebase
+            .firestore()
+            .collection('userData')
+            .doc(user)
+            .update({
+              FirstName: data.FirstName,
+              LastName: data.LastName,
+              PhoneNumber: data.PhoneNumber,
+              Area: data.Area,
+              City: data.City,
+            })
+            .then(() => {
+              console.log('User Updated!');
+              Alert.alert(
+                'Profile Updated!',
+                'Your profile has been updated successfully.'
+              );
+              navigation.goBack();
+            })
+          }
       }
        catch(e)
        {
@@ -178,7 +201,6 @@ const EditProfile = ({route,navigation}) => {
           <Feather name="map" size={20} />
             <TextInput
                 placeholder="Area"
-                keyboardType='number-pad'
                 placeholderTextColor= "#666666"
                 autocorrect={false}
                 value={data ? data.Area : ''}
