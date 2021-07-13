@@ -128,10 +128,10 @@ const Profile = ({route,navigation}) => {
       <View style={styles.infoBox}>
         <Title
             style={styles.menuItemText}
-            onPress={()=> navigation.navigate('myAds')}>{countD}</Title>
+            onPress={()=> navigation.navigate('MyAds')}>{countD}</Title>
         <Caption 
             style={{color:'darkred'}}
-            onPress={()=> navigation.navigate('myAds')}
+            onPress={()=> navigation.navigate('MyAds')}
             >Total Donated Objects</Caption>
       </View>
     </View>
