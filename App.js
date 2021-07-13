@@ -12,9 +12,6 @@ if(!firebase.apps.length)
 //icons for tab navigator
 import {MaterialCommunityIcons,FontAwesome} from '@expo/vector-icons';
 
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-// import FontAwesome from 'react-native-vectors-icons/';
-
 // imports for navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -42,7 +39,6 @@ import MyAds from './src/pages/myAds';
 import favorites from './src/pages/favorites';
 import MyRequest from './src/pages/MyRequest';
 import EditProfile from './src/pages/EditProfile';
-import DonorDetails from './src/pages/DonorDetails';
 import AdminDashboard from './src/pages/AdminDashboard';
 import AdminItemDisplay from './src/pages/AdminItemDisplay';
 import UserDetail from './src/pages/UserDetail';
@@ -105,11 +101,11 @@ function AdminStack()
           component={AdminDashboard}
           options={{
             title: 'Admin Dashboard'}}/>
-        <AdminS.Screen
+        {/* <AdminS.Screen
           name="DonorDetails"
           component={DonorDetails}
           options={{
-            title: 'Donated Items'}}/>
+            title: 'Donated Items'}}/> */}
         <AdminS.Screen
           name="AdminItemDisplay"
           component={AdminItemDisplay}

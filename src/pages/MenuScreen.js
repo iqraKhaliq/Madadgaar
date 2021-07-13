@@ -39,33 +39,27 @@ export function MenuScreen({navigation})
   }, [navigation,loading]);
 
   return (
-      <View style={{ flex: 1,backgroundColor: '#ffe4e1',height: '100%', alignContent: 'flex-start' }}>
+      <View style={styles.main}>
         <SafeAreaView>
           <ScrollView
             vertical={true}
             showsVerticalScrollIndicator={false}
             >
-          <View
-            style={{
-              // flex: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            
-          <View style={styles.Vstyle} >
-            <View>
-              <Image
-                source={{uri: data? data.ProfileImage || '../profiles/teenager.png': '../profiles/teenager.png'}}
-                style={{height: 150,width: 150,borderRadius: 1000}}
-                />
-            </View>
-
-            <View style={styles.head}>
-              <Text 
-                style={styles.VTstyle}
-                >Welcome {data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Text>
+          <View style={style.main2}>
+            <View style={styles.Vstyle} >
+              <View>
+                <Image
+                  source={{uri: data? data.ProfileImage || '../profiles/teenager.png': '../profiles/teenager.png'}}
+                  style={{height: 150,width: 150,borderRadius: 1000}}
+                  />
               </View>
-          </View>
+
+              <View style={styles.head}>
+                <Text 
+                  style={styles.VTstyle}
+                  >Welcome {data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Text>
+                </View>
+            </View>
 
             <TouchableOpacity
               style={styles.button}
@@ -151,13 +145,6 @@ export function MenuScreen({navigation})
               </View>
             </TouchableOpacity>
 
-            {/* <TouchableOpacity
-              style={styles.button}
-              onPress={() => navigation.navigate('FAQ')}
-              >
-              <Text style={styles.txtStyl}>FAQ's</Text>
-            </TouchableOpacity> */}
-
             <View style={styles.Vsignout}>
               <TouchableOpacity
                 style={styles.signout}
@@ -193,6 +180,18 @@ export function MenuScreen({navigation})
 
 const styles = StyleSheet.create
 ({
+  main:
+  { 
+    flex: 1,
+    backgroundColor: '#ffe4e1',
+    height: '100%', 
+    alignContent: 'flex-start',
+  },
+  main2:
+  {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   button: 
   {
     alignItems: 'baseline',

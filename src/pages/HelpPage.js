@@ -25,7 +25,7 @@ export default class helpPage extends React.Component
                 <Pressable>
                     <View style={styl.Vstyl2}>
                         <Text style={styl.Tstyl}><Octicons name='versions' color='darkred' size={20} /> Version</Text>
-                        <Text style={styl.Tstyl2}>1.0.0</Text>
+                        <Text style={styl.Tstyl2}>1.1.0</Text>
                     </View>
                 </Pressable>
                

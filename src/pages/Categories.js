@@ -1,7 +1,7 @@
 import React,{useState,useEffect, Component} from 'react';
 import {View,Text,StyleSheet,Pressable,TouchableOpacity,ScrollView,FlatList,ToastAndroid,Image,ActivityIndicator} from 'react-native';
 import {Avatar} from 'react-native-paper';
-import {SearchBar} from 'react-native-elements'; 
+import {Searchbar} from 'react-native-paper'; 
 import * as firebase from 'firebase';
 
 export class Categories extends Component
@@ -10,39 +10,20 @@ export class Categories extends Component
         searchData: "",
         data: [],
         loading: false,
+        isLoading: false,
     }
 
-        componentDidMount()
-        {
-            try
-            {
-                firebase
-                .firestore()
-                .collection('ads')
-                .where("ProductName", "==", this.state.searchData)
-                .get()
-                .then((docs) => {
-                    let data= [];
-                    const {Image1,ProductName,Description}=doc.data();
-                    data.push({
-                        id: docs.id,
-                        Image1,
-                        ProductName,
-                        Description,
-                    });
-                })
-                this.setState({data});
-                // console.log(data);
-            }
-            catch(e)
-            {
-                // ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-            }
-        }
+    updateSearch= (searchData) => {
+        this.setState({loading: false});
+        this.setState({searchData});
+    };
 
-        componentDidUpdate()
+    
+    componentDidUpdate()
+    {
+        try
         {
-            try
+            if(this.state.searchData !== null)
             {
                 firebase
                 .firestore()
@@ -61,7 +42,6 @@ export class Categories extends Component
                                 ProductName,
                                 Description,
                             });
-                            this.setState({loading: false});
                         }
                     })
                     this.setState({data});
@@ -69,29 +49,30 @@ export class Categories extends Component
                     this.setState({loading: true});
                 })
             }
-            catch(e)
-            {
-                ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-            }
         }
-
-        render()
+        catch(e)
         {
-            return(
+            ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+        }
+    }
+
+    render()
+    {
+        const {searchData}= this.state;
+
+        return(
                 <View style={styling.mainV}>
-                    <View style={styling.container} >
-                    <View>
-                    <SearchBar
-                        placeholder="Search Here ...."
-                        placeholderTextColor="#808080"
-                        lightTheme
-                        round
-                        style={{height: 15, flex: 1, width: 200}}
-                        value={this.state.searchData}
-                        onChangeText={word => this.setState({searchData: word})}
+
+                    <View style={styling.container1}>
+                        <Searchbar
+                            placeholder="Search Here ...."
+                            placeholderTextColor="#808080"
+                            value={searchData}
+                            onChangeText={this.updateSearch}
                         />
-                        {/* <Text>{this.state.searchData}</Text> */}
                     </View>
+                    
+                    <View style={styling.container} >
                         <View style={styling.Vstyle2}>
                             <ScrollView horizontal={true}  showsHorizontalScrollIndicator={false}>
     
@@ -175,7 +156,7 @@ export class Categories extends Component
                         </View>
     
                         <View>
-                        {/* {this.state.loading && <ActivityIndicator size="large" color="#800000"/>} */}
+                        {/* {this.state.isLoading && <ActivityIndicator size="large" color="#800000"/>} */}
                         {!this.state.loading && <View style={styling.loader}><Text style={styling.Txt}>Nothing to Display :(</Text></View>}
                             <ScrollView showsVerticalScrollIndicator={false}>
                                 <FlatList
@@ -218,6 +199,12 @@ const styling= StyleSheet.create({
         padding:10,
         flexDirection:'column',
         marginBottom:30,
+    },
+    container1:
+    {
+        flexDirection:'column',
+        paddingLeft: 10,
+        paddingRight: 10,
     },
     Txt:
     {
@@ -285,3 +272,43 @@ const styling= StyleSheet.create({
 
 export default Categories;
 
+
+
+
+// componentDidMount()
+    // {
+    //     try
+    //     {
+    //         if(this.state.searchData != null)
+    //         {
+    //             firebase
+    //             .firestore()
+    //             .collection('ads')
+    //             .where("ProductName", "==", this.state.searchData)
+    //             .get()
+    //             .then((docs) => {
+    //                 let data= [];
+    //                 docs.forEach((doc) => {
+    //                     if(doc.exists)
+    //                     {
+    //                         const {Image1,ProductName,Description}=doc.data();
+    //                         data.push({
+    //                             id: doc.id,
+    //                             Image1,
+    //                             ProductName,
+    //                             Description,
+    //                         });
+    //                         // this.setState({loading: false});
+    //                     }
+    //                 })
+    //                 this.setState({data});
+    //                 console.log(data);
+    //                 this.setState({loading: true});
+    //             })
+    //         }
+    //     }
+    //     catch(e)
+    //     {
+    //         // ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
+    //     }
+    // }
