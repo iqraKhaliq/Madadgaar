@@ -45,7 +45,7 @@ export function MenuScreen({navigation})
             vertical={true}
             showsVerticalScrollIndicator={false}
             >
-          <View style={style.main2}>
+          <View style={styles.main2}>
             <View style={styles.Vstyle} >
               <View>
                 <Image
