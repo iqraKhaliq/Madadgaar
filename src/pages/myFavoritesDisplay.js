@@ -3,8 +3,6 @@ import {View, Text, Button,Image, StyleSheet, ToastAndroid, TouchableOpacity, Al
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import * as firebase from "firebase";
 
-//id created for item
-// global.subId= uuidGenerator();
 
 export default function myFavoritesDisplay({route,navigation})
 {
@@ -127,6 +125,7 @@ export default function myFavoritesDisplay({route,navigation})
                     
                     //color set to white
                     setColor(true);
+                    navigation.navigate('Account');
                     ToastAndroid.show('Removed from Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
                 catch(e)
@@ -134,23 +133,6 @@ export default function myFavoritesDisplay({route,navigation})
                     ToastAndroid.show('Network Failed :(', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
                 }
             }
-            // else if(color === false)
-            // {
-            //     try
-            //     {
-            //         await reference.doc(id).set({
-            //             ProductId: id,
-            //         },{merge: true});
-                
-            //         //color set to red
-            //         setColor(true);
-            //         ToastAndroid.show('Added to Favorites', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-            //     }
-            //     catch(e)
-            //     {
-            //         ToastAndroid.show('Network failed :(',ToastAndroid.SHORT,ToastAndroid.BOTTOM);
-            //     }
-            // }
         }
         catch(e)
         {

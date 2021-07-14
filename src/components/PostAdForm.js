@@ -6,7 +6,6 @@ import Constants from 'expo-constants';
 import { MaterialIcons } from '@expo/vector-icons';
 import * as permissions from 'expo-permissions';
 
-//sets timer for longer period of time,it triggers warnings. So this is to disable those warnings.
 console.disableYellowBox= true;
 
 export default class PostAdForm extends React.Component
@@ -57,7 +56,7 @@ async componentDidMount()
 
     return (
       <View style={styles.viewer}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView vertical={true} showsVerticalScrollIndicator={false}>
           <View style={styles.viewer}>
               <View style={styles.viewer2}>
                     <ScrollView 
@@ -78,14 +77,6 @@ async componentDidMount()
                 style={styles.buttonStyl} 
                 />
 
-              {/* {!!image1 && Alert.alert(
-                'Important Note',
-                `Confirm Images before Posting Ad. You are not allowed to edit/update images later.\nThank You`,
-                [{
-                    text: 'Ok',
-                    style: 'cancel'
-                }]
-              )} */}
               <Text style={styles.txtStyl}>For Additional Images:</Text>
               <ScrollView 
                 horizontal={true} 
@@ -302,6 +293,7 @@ async componentDidMount()
   addData= async () =>
   {
     const uid=firebase.auth().currentUser.uid;
+
     try{
       // const add=await adding(image1Url,productName,description,list,donorName,phone,area,city);
       const reference= firebase.firestore().collection("ads");
@@ -370,17 +362,17 @@ async componentDidMount()
         alert("Thank you for Posting Ad");
         ToastAndroid.show('Successful',ToastAndroid.LONG, ToastAndroid.BOTTOM);
   
-          this.setState({productName: ""});
-          this.setState({list: ""});
-          this.setState({description: ""});
-          this.setState({donorName: ""});
-          this.setState({phone: ""});
-          this.setState({area: ""});
-          this.setState({city: ""});
-          this.setState({image1: null});
-          this.setState({image2: null});
-          this.setState({image3: null});
-          this.setState({image4: null});
+          this.setState({productName: "",
+              list: "",
+              description: "",
+              donorName: "",
+              phone: "",
+              area: "",
+              city: "",
+              image1: null,
+              image2: null,
+              image3: null,
+              image4: null});
       }
     }
     catch(e)

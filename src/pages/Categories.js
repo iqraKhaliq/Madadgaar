@@ -18,6 +18,11 @@ export class Categories extends Component
         this.setState({searchData});
     };
 
+    constructor()
+    {
+        super();
+        global.uid=firebase.auth().currentUser.uid;
+    }
     
     componentDidUpdate()
     {
@@ -35,18 +40,22 @@ export class Categories extends Component
                     docs.forEach((doc) => {
                         if(doc.exists)
                         {
-                            const {Image1,ProductName,Description}=doc.data();
-                            data.push({
-                                id: doc.id,
-                                Image1,
-                                ProductName,
-                                Description,
-                            });
+                            const {Image1,ProductName,Description,UserId}=doc.data();
+                            if(uid != UserId)
+                            {
+                                data.push({
+                                    id: doc.id,
+                                    Image1,
+                                    ProductName,
+                                    Description,
+                                });
+                                this.setState({loading: true});
+                            }
                         }
                     })
                     this.setState({data});
                     console.log(data);
-                    this.setState({loading: true});
+                    
                 })
             }
         }
@@ -54,6 +63,39 @@ export class Categories extends Component
         {
             ToastAndroid.show(e.toString(),ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }
+    }
+
+    componentWillUnmount()
+    {
+        if(this.state.searchData !== null)
+            {
+                firebase
+                .firestore()
+                .collection('ads')
+                .where("ProductName", "==", this.state.searchData)
+                .get()
+                .then((docs) => {
+                    let data= [];
+                    docs.forEach((doc) => {
+                        if(doc.exists)
+                        {
+                            const {Image1,ProductName,Description,UserId}=doc.data();
+                            if(uid != UserId)
+                            {
+                                data.push({
+                                    id: doc.id,
+                                    Image1,
+                                    ProductName,
+                                    Description,
+                                });
+                            }
+                        }
+                    })
+                    this.setState({data});
+                    console.log(data);
+                    this.setState({loading: true});
+                })
+            }
     }
 
     render()

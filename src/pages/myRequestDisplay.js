@@ -124,7 +124,7 @@ export function myRequestDisplay({route,navigation})
         try
         {
             await reference.doc(id).delete();
-            
+            navigation.navigate('Account');
             ToastAndroid.show('Removed from Database', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }
         catch(e)
@@ -162,7 +162,6 @@ export function myRequestDisplay({route,navigation})
         {
             ToastAndroid.show('Removing Details', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
             setViews(false);
-            this.props.navigation.navigate('DonorDetails');
         }
         catch(e)
         {

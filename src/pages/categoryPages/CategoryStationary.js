@@ -13,6 +13,8 @@ export class CategoryStationary extends Component
   constructor(props)
   {
     super(props);
+    const uid= firebase.auth().currentUser.uid;
+
     this.subscriber= firebase.firestore()
                               .collection('ads')
                               .where('Category', '==', 'stationary')
@@ -21,13 +23,16 @@ export class CategoryStationary extends Component
                                   docs.forEach(doc => {
                                     if(doc.exists)
                                     {
-                                      const {Image1,ProductName,Description}=doc.data();
-                                      users.push({
-                                        id: doc.id, 
-                                        Image1,
-                                        ProductName,
-                                        Description,
-                                      });
+                                      const {Image1,ProductName,Description,UserId}=doc.data();
+                                      if(uid != UserId)
+                                      {
+                                        users.push({
+                                          id: doc.id, 
+                                          Image1,
+                                          ProductName,
+                                          Description,
+                                        });
+                                      }
                                       this.setState({show: true});
                                     }
                                   });

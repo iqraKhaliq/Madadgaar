@@ -100,7 +100,7 @@ export function myAdsDisplay({route,navigation})
                         
                         {views && 
                             <View style={styles.VD}>
-                                {!!users.UserId && <Text style={styles.Dstyle}>Donor Id: {users.UserId}</Text>}
+                                {/* {!!users.UserId && <Text style={styles.Dstyle}>Donor Id: {users.UserId}</Text>} */}
                                 <Text style={styles.Dstyle}>Donor's Name: {users.DonorName}</Text>
                                 <Text style={styles.Dstyle}>Category: {users.Category}</Text>
                                 <Text style={styles.Dstyle}>Phone Number: {users.Phone}</Text>
@@ -132,7 +132,7 @@ export function myAdsDisplay({route,navigation})
         try
         {
             await reference.doc(id).delete();
-            
+            navigation.navigate('Account');
             ToastAndroid.show('Removed from Database', ToastAndroid.SHORT,ToastAndroid.BOTTOM);
         }
         catch(e)
@@ -170,7 +170,7 @@ export function myAdsDisplay({route,navigation})
         {
             ToastAndroid.show('Removing Details', ToastAndroid.SHORT, ToastAndroid.BOTTOM);
             setViews(false);
-            this.props.navigation.navigate('DonorDetails');
+            // navigation.navigate('DonorDetails');
         }
         catch(e)
         {

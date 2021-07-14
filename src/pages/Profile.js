@@ -53,6 +53,10 @@ const Profile = ({route,navigation}) => {
         {
           setB(true);
         }
+        else if(user == 'FxpnETnt9BOxcjz9hoG4IG1UVjP2')
+        {
+          setB(true);
+        }
       }
       catch(e)
       {
@@ -69,108 +73,111 @@ const Profile = ({route,navigation}) => {
     return (
       
    <SafeAreaView style={styles.container}>
-    <View style={styles.userInfoSection}>
-      <View style={{flexDirection: 'row', marginTop: 15 }}>
-        <Image 
-          source={{uri: data.ProfileImage}}
-          style={{borderRadius: 1000, height: 80, width: 80}}
-        />
-       
-        <View style={{marginLeft: 20}}>
-          <Title style={styles.title} >{data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Title>
+      <View style={styles.userInfoSection}>
+        <View style={{flexDirection: 'row', marginTop: 15 }}>
+          <Image 
+            source={{uri: data.ProfileImage}}
+            style={{borderRadius: 1000, height: 80, width: 80}}
+          />
+        
+          <View style={{marginLeft: 20}}>
+            <Title style={styles.title} >{data ? data.FirstName || 'User' : 'User'} {data ? data.LastName || 'Name' : 'Name'}</Title>
+            
+            <TouchableOpacity 
+              style={styles.editProfileButton}
+              onPress={() => navigation.navigate('EditProfile')}
+              >
+                <Icon name="account-edit" color="white" size={20}/>
+                <Text style={{color:'white',fontSize: 20}}>Edit Profile</Text>
+            </TouchableOpacity>
+          </View>
           
-          <TouchableOpacity 
-            style={styles.editProfileButton}
-            onPress={() => navigation.navigate('EditProfile')}
-            >
-              <Icon name="account-edit" color="white" size={20}/>
-              <Text style={{color:'white',fontSize: 20}}>Edit Profile</Text>
-          </TouchableOpacity>
         </View>
+      </View>
+          
+      <View style={styles.userInfoSection}>
+        <View style={styles.row}>
+          <Icon name="map-marker-radius" size={20} color="#808080" />
+          <Text style={{ marginLeft:20,color: "#800000"}}>{data ? data.City || 'City Name' : 'City Name'} </Text>
+        </View>
+
+        <View style={styles.row}>
+          <Icon name="phone"  size={20} color="#808080" />
+          <Text style={{ marginLeft:20, color: "#800000"}}>{data ? data.PhoneNumber || '+92---------' : '+92---------'}</Text>
+        </View>
+
+        <View style={styles.row}>
+          <Icon name="email"  size={20} color="#808080" />
+          <Text style={{ marginLeft:20, color: "#800000"}}>{data ? data.Email || 'Email' : 'Email'}</Text>
+        </View>
+
+        {B &&<TouchableOpacity 
+          style={styles.AdminButton} 
+          onPress={()=> navigation.navigate('AdminStack')}>
+          <Icon name="account-tie" color='white' size={15} />
+          <Text style={styles.AdminText} >Admin DashBoard</Text>
+        </TouchableOpacity>}
+      </View>
+      <View style={styles.infoBoxWrapper}>
         
-      </View>
-    </View>
         
-    <View style={styles.userInfoSection}>
-      <View style={styles.row}>
-        <Icon name="map-marker-radius" size={20} color="#808080" />
-        <Text style={{ marginLeft:20,color: "#800000"}}>{data ? data.City || 'City Name' : 'City Name'} </Text>
+          <View style={styles.infoBox}>
+            <Title
+                style={styles.menuItemText}
+                onPress={()=> navigation.navigate('MyRequest')}>{countR}</Title>
+            <Caption 
+                style={{color: 'darkred'}}
+                onPress={()=> navigation.navigate('MyRequest')}
+                >Total Requests Made</Caption>
+          </View>
+
+          <View style={styles.infoBox}>
+            <Title
+                style={styles.menuItemText}
+                onPress={()=> navigation.navigate('MyAds')}>{countD}</Title>
+            <Caption 
+                style={{color:'darkred'}}
+                onPress={()=> navigation.navigate('MyAds')}
+                >Total Ads Posted</Caption>
+          </View>
+
       </View>
 
-      <View style={styles.row}>
-        <Icon name="phone"  size={20} color="#808080" />
-        <Text style={{ marginLeft:20, color: "#800000"}}>{data ? data.PhoneNumber || '+92---------' : '+92---------'}</Text>
-      </View>
+      <View style={styles.menuWrapper}> 
+      
+      <TouchableRipple onPress={() => navigation.navigate('Favorites')}>
+          <View style={styles.menuItem}>
+            <Icon 
+              name= "account-heart-outline" 
+              color="red" 
+              size={25} 
+              />
+            <Text 
+              style={styles.menuItemText}
+              >My Favorites</Text>
+          </View>
+      </TouchableRipple>
+      <TouchableRipple onPress={() => navigation.navigate('MyAds')}>
+          <View style={styles.menuItem}>
+            <Icon name= "account-plus-outline" color="red" size={25} />
+            <Text style={styles.menuItemText}>My Ads</Text>
+          </View>
+      </TouchableRipple>
+      
+      <TouchableRipple onPress={() => navigation.navigate('MyRequest')}>
+          <View style={styles.menuItem}>
+            <Icon 
+              name= "account-star-outline" 
+              color="red" 
+              size={25} 
+              />
+            <Text 
+              style={styles.menuItemText}
+              >My Requests</Text>
+          </View>
+      </TouchableRipple>
 
-      <View style={styles.row}>
-        <Icon name="email"  size={20} color="#808080" />
-        <Text style={{ marginLeft:20, color: "#800000"}}>{data ? data.Email || 'Email' : 'Email'}</Text>
       </View>
-
-      {B &&<TouchableOpacity 
-        style={styles.AdminButton} 
-        onPress={()=> navigation.navigate('AdminStack')}>
-        <Icon name="account-tie" color='white' size={15} />
-        <Text style={styles.AdminText} >Admin DashBoard</Text>
-      </TouchableOpacity>}
-    </View>
-    <View style={styles.infoBoxWrapper}>
-      <View style={styles.infoBox}>
-        <Title
-            style={styles.menuItemText}
-            onPress={()=> navigation.navigate('MyRequest')}
-            >{countR}</Title>
-        <Caption 
-            style={{color: 'darkred'}}
-            onPress={()=> navigation.navigate('MyRequest')}
-            >Total Requests Made</Caption>
-      </View>
-      <View style={styles.infoBox}>
-        <Title
-            style={styles.menuItemText}
-            onPress={()=> navigation.navigate('MyAds')}>{countD}</Title>
-        <Caption 
-            style={{color:'darkred'}}
-            onPress={()=> navigation.navigate('MyAds')}
-            >Total Donated Objects</Caption>
-      </View>
-    </View>
-    <View style={styles.menuWrapper}> 
-    <TouchableRipple onPress={() => navigation.navigate('Favorites')}>
-        <View style={styles.menuItem}>
-          <Icon 
-            name= "account-heart-outline" 
-            color="red" 
-            size={25} 
-            />
-          <Text 
-            style={styles.menuItemText}
-            >My Favorites</Text>
-        </View>
-    </TouchableRipple>
-    <TouchableRipple onPress={() => navigation.navigate('MyAds')}>
-        <View style={styles.menuItem}>
-          <Icon name= "account-plus-outline" color="red" size={25} />
-          <Text style={styles.menuItemText}>My Ads</Text>
-        </View>
-    </TouchableRipple>
-    
-    <TouchableRipple onPress={() => navigation.navigate('MyRequest')}>
-        <View style={styles.menuItem}>
-          <Icon 
-            name= "account-star-outline" 
-            color="red" 
-            size={25} 
-            />
-          <Text 
-            style={styles.menuItemText}
-            >My Requests</Text>
-        </View>
-    </TouchableRipple>
-
-
-     
-    </View>
     </SafeAreaView>
     );
     }
@@ -219,6 +226,8 @@ const Profile = ({route,navigation}) => {
       width: ' 50%',
       alignItems: 'center',
       justifyContent: 'center',
+      alignContent: 'center',
+      padding: 15,
     },
     menuWrapper: 
     {

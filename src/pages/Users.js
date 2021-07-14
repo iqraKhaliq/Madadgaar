@@ -5,7 +5,7 @@ import {Avatar} from 'react-native-paper';
 import * as firebase from "firebase";
 
 export class Users extends Component
-{
+{  
   state={
     users: []
   };
@@ -13,18 +13,23 @@ export class Users extends Component
   constructor(props)
   {
     super(props);
+    const uid= firebase.auth().currentUser.uid;
+
     this.subscriber= firebase.firestore()
                               .collection('userData')
                               .onSnapshot(docs => {
                                 let users=[];
                                 docs.forEach(doc => {
                                   const {FirstName, LastName ,ProfileImage}=doc.data();
-                                  users.push({
-                                    id: doc.id, 
-                                    FirstName, 
-                                    LastName,
-                                    ProfileImage,
-                                  });
+                                  if(uid != doc.id)
+                                  {
+                                    users.push({
+                                      id: doc.id, 
+                                      FirstName, 
+                                      LastName,
+                                      ProfileImage,
+                                    });
+                                  }
                                 });
                                 this.setState({users});
                                 console.log(users);
